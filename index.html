@@ -15,6 +15,8 @@
     --teal:#4ecdc4;
     --teal-dim:#2d9a93;
     --teal-glow:rgba(78,205,196,0.35);
+    --steel-blue:#3082b8;
+    --steel-glow:rgba(48,130,184,0.35);
     --ink:#ffffff;
     --ink-soft:rgba(255,255,255,0.7);
     --ink-faint:rgba(255,255,255,0.45);
@@ -61,12 +63,12 @@
     white-space:nowrap;
   }
   .btn-primary{
-    background:var(--teal);color:var(--navy-deep);
+    background:linear-gradient(135deg, var(--teal), var(--steel-blue));color:var(--navy-deep);
     box-shadow:0 0 0 0 var(--teal-glow);
   }
   .btn-primary:hover{
     transform:translateY(-2px);
-    box-shadow:0 8px 28px -6px var(--teal-glow), 0 0 0 1px var(--teal);
+    box-shadow:0 8px 28px -6px var(--steel-glow), 0 0 0 1px var(--teal);
   }
   .btn-ghost{
     background:transparent;border-color:var(--line);color:var(--ink);
@@ -96,13 +98,25 @@
     font-family:var(--display);font-weight:700;font-size:19px;
     display:flex;align-items:center;gap:10px;letter-spacing:-0.01em;
   }
-  .logo-mark{
-    width:30px;height:30px;border-radius:8px;
-    background:linear-gradient(135deg,var(--teal),var(--teal-dim));
-    display:flex;align-items:center;justify-content:center;
-    position:relative;flex:none;
+  .logo-badge {
+    height: 36px;
+    width: 135px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .logo-mark svg{width:16px;height:16px;}
+  .logo-badge img {
+    width: 165px;
+    height: 165px;
+    object-fit: contain;
+    margin-top: -13px;
+    flex: none;
+  }
   .nav-links{display:flex;gap:32px;align-items:center;}
   .nav-links a{
     font-size:14px;font-weight:500;color:var(--ink-soft);
@@ -186,6 +200,31 @@
   .radar-dot{
     position:absolute;width:6px;height:6px;border-radius:50%;background:var(--teal);
     box-shadow:0 0 10px var(--teal);
+  }
+  .radar-logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid var(--teal);
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.35);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .radar-logo-container img {
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+    margin-left: 50px;
+    margin-top: -9px;
+    flex: none;
   }
   .float-container{
     position:absolute;inset:0;pointer-events:none;
@@ -441,12 +480,11 @@
 
 <header>
   <nav>
-    <div class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#0a1628" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#0a1628"/><path d="M12 1V4M12 20V23M1 12H4M20 12H23" stroke="#0a1628" stroke-width="2" stroke-linecap="round"/></svg>
+    <a href="#home" class="logo">
+      <div class="logo-badge">
+        <img src="Admit_Hunt.jpeg" alt="Admit Hunt">
       </div>
-      Admit&nbsp;Hunt
-    </div>
+    </a>
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#fields">Fields</a>
@@ -510,6 +548,9 @@
         <div class="radar-dot" style="top:22%;left:62%;"></div>
         <div class="radar-dot" style="top:60%;left:30%;"></div>
         <div class="radar-dot" style="top:75%;left:68%;"></div>
+        <div class="radar-logo-container">
+          <img src="Admit_Hunt.jpeg" alt="Admit Hunt Icon">
+        </div>
       </div>
       <div class="float-container">
         <a class="float-card fc1" href="#testimonials">
@@ -818,12 +859,11 @@
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="logo">
-          <div class="logo-mark">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#0a1628" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#0a1628"/><path d="M12 1V4M12 20V23M1 12H4M20 12H23" stroke="#0a1628" stroke-width="2" stroke-linecap="round"/></svg>
+        <a href="#home" class="logo">
+          <div class="logo-badge">
+            <img src="Admit_Hunt.jpeg" alt="Admit Hunt">
           </div>
-          Admit&nbsp;Hunt
-        </div>
+        </a>
         <p>Hunting the right college for your future — personalized admissions guidance for India and abroad.</p>
         <div class="footer-badge">
           <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
