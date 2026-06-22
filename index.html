@@ -258,10 +258,11 @@
   .fields-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   .field-card{
     display:block;
-    border:1px solid var(--line);border-radius:16px;padding:30px 26px;
+    border:1px solid var(--line);border-radius:16px;
     background:#ffffff;
     box-shadow:0 4px 20px rgba(0,0,0,0.02);
     transition:border-color .3s ease, transform .3s ease, background .3s ease, box-shadow .3s ease;
+    overflow:hidden;
   }
   .field-card:hover{
     border-color:var(--teal);
@@ -269,13 +270,21 @@
     background:#ffffff;
     box-shadow:0 20px 40px -12px rgba(45, 189, 182, 0.12);
   }
-  .field-icon{
-    width:44px;height:44px;border-radius:11px;background:rgba(48,130,184,0.08);
-    display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--steel-blue);
+  .field-img-container{
+    height:180px;width:100%;overflow:hidden;position:relative;
+    background:var(--bg-soft);
   }
-  .field-icon svg{width:22px;height:22px;}
-  .field-card h3{font-size:18px;margin-bottom:8px;}
-  .field-card p{font-size:14px;color:var(--ink-soft);margin-bottom:14px;}
+  .field-img-container img{
+    width:100%;height:100%;object-fit:cover;transition:transform .5s ease;
+  }
+  .field-card:hover .field-img-container img{
+    transform:scale(1.05);
+  }
+  .field-content{
+    padding:24px;
+  }
+  .field-card h3{font-size:18px;margin-bottom:8px;color:var(--navy);}
+  .field-card p{font-size:14.5px;color:var(--ink-soft);margin-bottom:16px;line-height:1.6;}
   .field-pill{
     font-family:var(--mono);font-size:11px;color:var(--steel-blue);
     border:1px solid rgba(48,130,184,0.2);padding:4px 10px;border-radius:100px;display:inline-block;
@@ -584,62 +593,69 @@
     <div class="fields-grid">
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
+        <div class="field-img-container">
+          <img src="engineering_edu.png" alt="Engineering" loading="lazy">
         </div>
-        <h3>Engineering</h3>
-        <p>Secure seats in premier engineering colleges. Complete counseling support for JEE, COMEDK, and direct admissions.</p>
-        <span class="field-pill">India &amp; Abroad</span>
-      </a>
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4.5 5h3M16.5 5h3" />
-            <path d="M6 5v6a6 6 0 0 0 12 0V5" />
-            <path d="M12 16v3" />
-            <circle cx="12" cy="21" r="2" />
-          </svg>
+        <div class="field-content">
+          <h3>Engineering</h3>
+          <p>Secure seats in premier engineering colleges. Complete counseling support for JEE, COMEDK, and direct admissions.</p>
+          <span class="field-pill">India &amp; Abroad</span>
         </div>
-        <h3>Medical</h3>
-        <p>Join top-tier medical colleges. Expert navigation for NEET counseling, MBBS, and allied health sciences.</p>
-        <span class="field-pill">India &amp; Abroad</span>
       </a>
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-          </svg>
+        <div class="field-img-container">
+          <img src="medical_edu.png" alt="Medical" loading="lazy">
         </div>
-        <h3>MBA</h3>
-        <p>Get admission into top B-schools in India &amp; Abroad. Expert profile building and interview prep.</p>
-        <span class="field-pill">India &amp; Abroad</span>
+        <div class="field-content">
+          <h3>Medical</h3>
+          <p>Join top-tier medical colleges. Expert navigation for NEET counseling, MBBS, and allied health sciences.</p>
+          <span class="field-pill">India &amp; Abroad</span>
+        </div>
       </a>
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 7l7-4 7 4M3 21h18M5 7v6M19 7v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Law</h3>
-        <p>Integrated &amp; postgraduate legal studies.</p>
-        <span class="field-pill">India &amp; Abroad</span>
+        <div class="field-img-container">
+          <img src="mba_edu.png" alt="MBA" loading="lazy">
+        </div>
+        <div class="field-content">
+          <h3>MBA</h3>
+          <p>Get admission into top B-schools in India &amp; Abroad. Expert profile building and interview prep.</p>
+          <span class="field-pill">India &amp; Abroad</span>
+        </div>
       </a>
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.1 2.1M7.03 16.97l-2.1 2.1M19.07 19.07l-2.1-2.1M7.03 7.03l-2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <h3>Design</h3>
-        <p>Visual, product &amp; communication design.</p>
-        <span class="field-pill">India &amp; Abroad</span>
+        <div class="field-img-container">
+          <img src="law_edu.png" alt="Law" loading="lazy">
+        </div>
+        <div class="field-content">
+          <h3>Law</h3>
+          <p>Secure admissions in top national law universities (NLUs) and international law schools. Expert CLAT &amp; LSAT guidance.</p>
+          <span class="field-pill">India &amp; Abroad</span>
+        </div>
       </a>
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="18" cy="12" r="1.6" fill="currentColor"/></svg></div>
-        <h3>And More</h3>
-        <p>Talk to us about your specific field of interest.</p>
-        <span class="field-pill">India &amp; Abroad</span>
+        <div class="field-img-container">
+          <img src="design_edu.png" alt="Design" loading="lazy">
+        </div>
+        <div class="field-content">
+          <h3>Design</h3>
+          <p>Join elite design institutes (NID, NIFT, IITs). Portfolio development and design entrance exam guidance.</p>
+          <span class="field-pill">India &amp; Abroad</span>
+        </div>
+      </a>
+
+      <a class="field-card reveal" href="#enquiry">
+        <div class="field-img-container">
+          <img src="more_edu.png" alt="Other Fields" loading="lazy">
+        </div>
+        <div class="field-content">
+          <h3>And More</h3>
+          <p>Guidance for Commerce, Pure Sciences, Architecture, Liberal Arts, and other emerging fields globally.</p>
+          <span class="field-pill">India &amp; Abroad</span>
+        </div>
       </a>
 
     </div>
