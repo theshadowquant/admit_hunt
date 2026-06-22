@@ -326,7 +326,7 @@
   .stat-label{font-size:14px;color:var(--ink-soft);margin-top:8px;}
 
   /* ENQUIRY */
-  .enquiry{background:var(--bg-soft);}
+  .enquiry{background:var(--bg-main);}
   .enquiry-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:start;}
   .enquiry h2{font-size:36px;margin-bottom:16px;}
   .enquiry-desc{color:var(--ink-soft);font-size:16px;margin-bottom:28px;}
@@ -446,6 +446,7 @@
   @media (max-width:980px){
     .hero-inner{grid-template-columns:1fr;}
     .hero-visual{height:320px;margin-top:20px;}
+    .float-container{display:none;}
     .trust-grid{grid-template-columns:repeat(2,1fr);gap:20px;}
     .fields-grid{grid-template-columns:repeat(2,1fr);}
     .services-grid{grid-template-columns:1fr;}
@@ -487,7 +488,10 @@
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-cta">
-      <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+        <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
+        <span style="font-family: var(--mono); font-size: 9px; color: var(--teal); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">🔒 No Spam Calls</span>
+      </div>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -502,7 +506,10 @@
   <a href="#services">Services</a>
   <a href="#enquiry">Enquiry</a>
   <a href="#contact">Contact</a>
-  <a class="btn btn-primary config-form-url" target="_blank" rel="noopener" style="margin-top:8px;">Book Free Session</a>
+  <div style="display: flex; flex-direction: column; gap: 4px; align-items: stretch; margin-top: 8px;">
+    <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
+    <span style="font-family: var(--mono); font-size: 10px; color: var(--teal); font-weight: 600; text-align: center; text-transform: uppercase;">🔒 No Spam Calls</span>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -526,14 +533,14 @@
       <ul class="feature-list">
         <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Personalized Counseling</li>
         <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Global Admissions</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Scholarship Support</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Application Support</li>
       </ul>
 
       <div class="hero-ctas">
         <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Counseling Session</a>
         <a class="btn btn-ghost" href="#fields">Explore Fields</a>
       </div>
-      <div class="hero-proof">95% success rate · 50+ partner universities</div>
+      <div class="hero-proof">95% success rate · 50+ partner universities · No spam calls</div>
     </div>
 
     <div class="hero-visual">
@@ -551,9 +558,9 @@
           <div class="fc-label">Free Counseling</div>
           <div class="fc-value">Book Session</div>
         </a>
-        <a class="float-card fc2" href="#services">
-          <div class="fc-label">Scholarship Aid</div>
-          <div class="fc-value">Funding Support</div>
+        <a class="float-card fc2" href="#fields">
+          <div class="fc-label">Admission Guidance</div>
+          <div class="fc-value">India &amp; Abroad</div>
         </a>
       </div>
     </div>
@@ -573,7 +580,7 @@
     </div>
     <div class="trust-item reveal">
       <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-      <span>Scholarship Guidance</span>
+      <span>Application Strategy</span>
     </div>
     <div class="trust-item reveal">
       <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
@@ -685,9 +692,9 @@
       </a>
 
       <a class="service-card reveal" href="#enquiry">
-        <h3>Scholarship Guidance</h3>
-        <p>Identify funding routes you actually qualify for, and guidance on applying for them.</p>
-        <div class="chip-row"><span class="chip">Funding Routes</span><span class="chip">Eligibility</span></div>
+        <h3>Application &amp; Documentation</h3>
+        <p>End-to-end guidance on application forms, document checklists, and submission timelines.</p>
+        <div class="chip-row"><span class="chip">SOP &amp; Essays</span><span class="chip">Timelines</span></div>
       </a>
 
       <a class="service-card reveal" href="#enquiry">
@@ -700,8 +707,42 @@
   </div>
 </section>
 
+<!-- ENQUIRY -->
+<section class="enquiry" id="enquiry">
+  <div class="wrap enquiry-grid">
+    <div class="reveal">
+      <div class="eyebrow">Take The First Step</div>
+      <h2>Start Your Admission Enquiry</h2>
+      <p class="enquiry-desc">Engineering, Medical, MBA, Law, Design &amp; more — tell us your goals and we'll take it from there.</p>
+
+      <ul class="enquiry-features">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free consultation</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Profile evaluation</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>College shortlisting</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Application strategy</li>
+      </ul>
+    </div>
+
+    <div class="enquiry-card reveal">
+      <div class="qr-box">
+        <img class="config-qr-code" alt="QR code to enquiry form" loading="lazy">
+      </div>
+      <div class="scan-label">Scan to Apply</div>
+      <div style="margin-bottom: 18px;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1e293b; background: #f0fdfa; border: 1px solid #ccfbf1; padding: 6px 12px; border-radius: 8px;">
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          We don't do SPAM calls
+        </span>
+      </div>
+      <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Open Google Form</a>
+      <div class="enquiry-microcopy">Takes under 60 seconds · Only relevant updates</div>
+      <a class="btn btn-ghost config-email-href config-email-text">admithunt@gmail.com</a>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
-<section id="how-it-works" style="border-top: 1px solid var(--line);">
+<section id="how-it-works" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Process</div>
@@ -766,47 +807,18 @@
   </div>
 </section>
 
-<!-- ENQUIRY -->
-<section class="enquiry" id="enquiry">
-  <div class="wrap enquiry-grid">
-    <div class="reveal">
-      <div class="eyebrow">Take The First Step</div>
-      <h2>Start Your Admission Enquiry</h2>
-      <p class="enquiry-desc">Engineering, Medical, MBA, Law, Design &amp; more — tell us your goals and we'll take it from there.</p>
 
-      <ul class="enquiry-features">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free consultation</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Profile evaluation</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>College shortlisting</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Application strategy</li>
-      </ul>
-    </div>
-
-    <div class="enquiry-card reveal">
-      <div class="qr-box">
-        <img class="config-qr-code" alt="QR code to enquiry form" loading="lazy">
-      </div>
-      <div class="scan-label">Scan to Apply</div>
-      <div style="margin-bottom: 18px;">
-        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1e293b; background: #f0fdfa; border: 1px solid #ccfbf1; padding: 6px 12px; border-radius: 8px;">
-          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/><path d="m9 12 2 2 4-4"/></svg>
-          We don't do SPAM calls
-        </span>
-      </div>
-      <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Open Google Form</a>
-      <div class="enquiry-microcopy">Takes under 60 seconds · Only relevant updates</div>
-      <a class="btn btn-ghost config-email-href config-email-text">admithunt@gmail.com</a>
-    </div>
-  </div>
-</section>
 
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-mobile-cta" id="stickyCta">
-  <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
+  <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
+    <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
+    <span style="font-family: var(--mono); font-size: 10px; color: var(--teal); font-weight: 600; text-transform: uppercase;">🔒 No Spam Calls</span>
+  </div>
 </div>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Reach Us</div>
