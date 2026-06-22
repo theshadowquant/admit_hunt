@@ -412,29 +412,7 @@
   .step-card h3{font-size:18px;margin-bottom:4px;color:var(--navy);}
   .step-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
 
-  /* TESTIMONIALS */
-  .testimonials-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  }
-  .testimonial-card{
-    border:1px solid var(--line);border-radius:16px;padding:32px;
-    background:#ffffff;display:flex;flex-direction:column;justify-content:space-between;
-    gap:24px;transition:border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow:0 4px 20px rgba(0,0,0,0.02);
-  }
-  .testimonial-card:hover{
-    border-color:var(--teal);
-    transform:translateY(-4px);
-    box-shadow:0 20px 40px -12px rgba(45, 189, 182, 0.12);
-  }
-  .testimonial-card .quote{font-size:14.5px;color:var(--ink-soft);font-style:italic;line-height:1.6;}
-  .profile-info{display:flex;align-items:center;gap:12px;}
-  .avatar-placeholder{
-    width:40px;height:40px;border-radius:50%;background:rgba(48,130,184,0.08);
-    border:1px solid rgba(48,130,184,0.2);flex:none;
-  }
-  .student-name{font-size:14px;font-weight:600;color:var(--ink);}
-  .student-field{font-size:12px;color:var(--ink-faint);font-family:var(--mono);margin-top:2px;}
+
 
   /* STICKY MOBILE CTA */
   .sticky-mobile-cta{
@@ -463,7 +441,7 @@
     .fields-grid{grid-template-columns:repeat(2,1fr);}
     .services-grid{grid-template-columns:1fr;}
     .steps-grid{grid-template-columns:1fr;gap:20px;}
-    .testimonials-grid{grid-template-columns:1fr;gap:20px;}
+
     .stats-grid{grid-template-columns:1fr;gap:36px;}
     .enquiry-grid{grid-template-columns:1fr;}
     .contact-grid{grid-template-columns:1fr;}
@@ -560,9 +538,9 @@
         </div>
       </div>
       <div class="float-container">
-        <a class="float-card fc1" href="#testimonials">
-          <div class="fc-label">Success Stories</div>
-          <div class="fc-value">Real Outcomes</div>
+        <a class="float-card fc1" href="#enquiry">
+          <div class="fc-label">Free Counseling</div>
+          <div class="fc-value">Book Session</div>
         </a>
         <a class="float-card fc2" href="#services">
           <div class="fc-label">Scholarship Aid</div>
@@ -606,23 +584,40 @@
     <div class="fields-grid">
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 9.5V16c0 1 2.7 3 6 3s6-2 6-3V9.5" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div class="field-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </div>
         <h3>Engineering</h3>
-        <p>Core, computing &amp; emerging specializations.</p>
+        <p>Secure seats in premier engineering colleges. Complete counseling support for JEE, COMEDK, and direct admissions.</p>
         <span class="field-pill">India &amp; Abroad</span>
       </a>
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v6M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5 21l3.5-12h7L19 21H5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="field-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 5h3M16.5 5h3" />
+            <path d="M6 5v6a6 6 0 0 0 12 0V5" />
+            <path d="M12 16v3" />
+            <circle cx="12" cy="21" r="2" />
+          </svg>
+        </div>
         <h3>Medical</h3>
-        <p>MBBS &amp; allied health science pathways.</p>
+        <p>Join top-tier medical colleges. Expert navigation for NEET counseling, MBBS, and allied health sciences.</p>
         <span class="field-pill">India &amp; Abroad</span>
       </a>
 
       <a class="field-card reveal" href="#enquiry">
-        <div class="field-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 4h7v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="field-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
         <h3>MBA</h3>
-        <p>Management programs across specializations.</p>
+        <p>Get admission into top B-schools in India &amp; Abroad. Expert profile building and interview prep.</p>
         <span class="field-pill">India &amp; Abroad</span>
       </a>
 
@@ -690,7 +685,7 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how-it-works" style="background: var(--navy-deep); border-top: 1px solid var(--line);">
+<section id="how-it-works" style="border-top: 1px solid var(--line);">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Process</div>
@@ -735,52 +730,7 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<!-- REPLACE WITH REAL TESTIMONIALS BEFORE LAUNCH -->
-<section id="testimonials" style="background: var(--navy); border-top: 1px solid var(--line);">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Success Stories</div>
-      <h2>Student Testimonials</h2>
-      <p>Hear from students who navigated their admission journeys with Admit Hunt.</p>
-    </div>
-    
-    <div class="testimonials-grid">
-      <div class="testimonial-card reveal">
-        <p class="quote">"The personalized counseling sessions helped me find programs that aligned perfectly with my interests and career objectives. They made a complicated process feel simple."</p>
-        <div class="profile-info">
-          <div class="avatar-placeholder"></div>
-          <div>
-            <div class="student-name">[Student Name]</div>
-            <div class="student-field">[e.g. Engineering Aspirant]</div>
-          </div>
-        </div>
-      </div>
 
-      <div class="testimonial-card reveal">
-        <p class="quote">"I was overwhelmed by all the university choices, but the profile evaluation gave me a clear direction and a realistic list of target colleges to focus on."</p>
-        <div class="profile-info">
-          <div class="avatar-placeholder"></div>
-          <div>
-            <div class="student-name">[Student Name]</div>
-            <div class="student-field">[e.g. MBA Candidate]</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal">
-        <p class="quote">"The scholarship guidance was invaluable. They pointed out funding opportunities and pathways that I would have completely missed on my own."</p>
-        <div class="profile-info">
-          <div class="avatar-placeholder"></div>
-          <div>
-            <div class="student-name">[Student Name]</div>
-            <div class="student-field">[e.g. Medical Student]</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- STATS -->
 <section class="stats">
@@ -821,8 +771,14 @@
         <img class="config-qr-code" alt="QR code to enquiry form" loading="lazy">
       </div>
       <div class="scan-label">Scan to Apply</div>
+      <div style="margin-bottom: 18px;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1e293b; background: #f0fdfa; border: 1px solid #ccfbf1; padding: 6px 12px; border-radius: 8px;">
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          We don't do SPAM calls
+        </span>
+      </div>
       <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Open Google Form</a>
-      <div class="enquiry-microcopy">Takes under 60 seconds · No spam calls · Only relevant updates</div>
+      <div class="enquiry-microcopy">Takes under 60 seconds · Only relevant updates</div>
       <a class="btn btn-ghost config-email-href config-email-text">admithunt@gmail.com</a>
     </div>
   </div>
