@@ -1,1030 +1,2816 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admit Hunt — Hunting the Right College for Your Future</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#0a1628;
-    --navy-deep:#050b14;
-    --navy-soft:#1a2b42;
-    --teal:#2dbdb6;
-    --teal-dim:#219690;
-    --teal-glow:rgba(45,189,182,0.12);
-    --steel-blue:#3082b8;
-    --steel-glow:rgba(48,130,184,0.12);
-    --bg-main:#ffffff;
-    --bg-soft:#f8fafc;
-    --ink:#0a1628;
-    --ink-soft:#475569;
-    --ink-faint:#94a3b8;
-    --line:#e2e8f0;
-    --display:'Space Grotesk',sans-serif;
-    --body:'Inter',sans-serif;
-    --mono:'JetBrains Mono',monospace;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg-main);
-    color:var(--ink);
-    font-family:var(--body);
-    line-height:1.5;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:12px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--steel-blue);
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-bottom:14px;
-  }
-  .eyebrow::before{
-    content:'';
-    width:6px;height:6px;border-radius:50%;
-    background:var(--steel-blue);
-    box-shadow:0 0 8px var(--steel-blue);
-  }
-  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-0.01em;color:var(--navy);}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:14px 26px;border-radius:10px;font-family:var(--body);
-    font-weight:600;font-size:15px;cursor:pointer;border:1px solid transparent;
-    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
-    white-space:nowrap;
-  }
-  .btn-primary{
-    background:linear-gradient(135deg, var(--teal), var(--steel-blue));color:#ffffff;
-    box-shadow:0 0 0 0 var(--teal-glow);
-  }
-  .btn-primary:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 28px -6px var(--steel-glow), 0 0 0 1px var(--teal);
-  }
-  .btn-ghost{
-    background:transparent;border-color:var(--line);color:var(--ink-soft);
-  }
-  .btn-ghost:hover{border-color:var(--steel-blue);color:var(--steel-blue);transform:translateY(-2px);}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admit Hunt — India's First AI Education OS | Your Personal Academic Architect</title>
+  <meta name="description"
+    content="India's first AI-powered Education Operating System. From Class 8 to Career — personalized, explainable, data-driven guidance. No guesswork. No spam. Just outcomes.">
+  <meta name="keywords"
+    content="AI education platform India, college admission guidance, career counseling AI, scholarship finder India, education operating system">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-deep: #050b14;
+      --navy-soft: #1a2b42;
+      --teal: #2dbdb6;
+      --teal-dim: #219690;
+      --teal-glow: rgba(45, 189, 182, 0.12);
+      --teal-bright: #4ecdc4;
+      --steel-blue: #3082b8;
+      --steel-glow: rgba(48, 130, 184, 0.12);
+      --bg-main: #ffffff;
+      --bg-soft: #f8fafc;
+      --bg-warm: #fff8f0;
+      --ink: #0a1628;
+      --ink-soft: #475569;
+      --ink-faint: #94a3b8;
+      --line: #e2e8f0;
+      --line-warm: #f0e6d8;
+      --accent-orange: #f59e0b;
+      --accent-orange-soft: #fef3c7;
+      --accent-rose: #f43f5e;
+      --accent-rose-soft: #ffe4e6;
+      --success: #10b981;
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
 
-  /* reveal animation */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
-  @media (prefers-reduced-motion: reduce){
-    .reveal{opacity:1;transform:none;transition:none;}
-    html{scroll-behavior:auto;}
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* NAVBAR */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    backdrop-filter:blur(16px) saturate(160%);
-    background:rgba(255,255,255,0.8);
-    border-bottom:1px solid var(--line);
-  }
-  nav{
-    max-width:1180px;margin:0 auto;padding:16px 24px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .logo{
-    display:flex;align-items:center;flex:none;
-  }
-  .nav-links{display:flex;gap:32px;align-items:center;}
-  .nav-links a{
-    font-size:14px;font-weight:500;color:var(--ink-soft);
-    position:relative;padding:4px 0;transition:color .2s ease;
-  }
-  .nav-links a:hover{color:var(--navy);}
-  .nav-links a::after{
-    content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
-    background:var(--steel-blue);transition:width .25s ease;
-  }
-  .nav-links a:hover::after{width:100%;}
-  .nav-cta{display:flex;align-items:center;gap:18px;}
-  .nav-cta .btn{padding:10px 20px;font-size:14px;}
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
-  .hamburger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.25s;}
-  .mobile-menu{
-    position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;
-    background:var(--bg-main);border-left:1px solid var(--line);
-    padding:90px 28px 28px;transition:right .35s ease;z-index:99;
-    display:flex;flex-direction:column;gap:24px;
-  }
-  .mobile-menu.open{right:0;}
-  .mobile-menu a{font-size:16px;font-weight:500;color:var(--ink);}
-  .scrim{position:fixed;inset:0;background:rgba(0,0,0,0.3);opacity:0;pointer-events:none;transition:opacity .3s;z-index:98;}
-  .scrim.open{opacity:1;pointer-events:auto;}
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* HERO */
-  .hero{
-    position:relative;padding:170px 0 120px;
-    background:
-      radial-gradient(circle at 78% 18%, rgba(78,205,196,0.1), transparent 45%),
-      radial-gradient(circle at 10% 90%, rgba(48,130,184,0.08), transparent 40%);
-    overflow:hidden;
-  }
-  .hero-grid{
-    position:absolute;inset:0;opacity:0.3;
-    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:64px 64px;
-    mask-image:radial-gradient(ellipse 60% 50% at 50% 30%, black 10%, transparent 70%);
-  }
-  .hero-inner{
-    position:relative;display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;
-  }
-  .hero h1{font-size:54px;line-height:1.06;margin-bottom:20px;color:var(--navy);}
-  .hero h1 .hl{color:var(--steel-blue);}
-  .hero-sub{font-size:18px;color:var(--ink-soft);max-width:480px;margin-bottom:28px;}
-  .field-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
-  .field-tag{
-    font-family:var(--mono);font-size:12.5px;padding:7px 14px;border-radius:100px;
-    border:1px solid var(--line);color:var(--ink-soft);background:#ffffff;
-  }
-  .feature-list{display:flex;flex-direction:column;gap:11px;margin-bottom:34px;}
-  .feature-list li{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ink-soft);list-style:none;}
-  .feature-list .check{
-    width:18px;height:18px;border-radius:50%;background:rgba(48,130,184,0.08);
-    display:flex;align-items:center;justify-content:center;flex:none;
-  }
-  .feature-list .check svg{width:10px;height:10px;}
-  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+    body {
+      background: var(--bg-main);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
 
-  .hero-visual{position:relative;height:440px;}
-  .radar{
-    position:absolute;top:0;right:0;width:380px;height:380px;border-radius:50%;
-    border:1px solid var(--line);
-  }
-  .radar::before,.radar::after{
-    content:'';position:absolute;border-radius:50%;border:1px solid var(--line);
-  }
-  .radar::before{inset:60px;}
-  .radar::after{inset:120px;}
-  .radar-sweep{
-    position:absolute;inset:0;border-radius:50%;overflow:hidden;
-  }
-  .radar-sweep::before{
-    content:'';position:absolute;inset:0;
-    background:conic-gradient(from 0deg, rgba(78,205,196,0.15), transparent 28%);
-    animation:spin 5s linear infinite;
-    animation-play-state:paused;
-  }
-  @keyframes spin{to{transform:rotate(360deg);}}
-  .radar-dot{
-    position:absolute;width:6px;height:6px;border-radius:50%;background:var(--teal);
-    box-shadow:0 0 10px var(--teal);
-  }
-  .radar-logo-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 2px solid var(--teal);
-    box-shadow: 0 0 20px rgba(78, 205, 196, 0.2);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-  .radar-logo-container img {
-    width: 170px;
-    height: 170px;
-    object-fit: contain;
-    margin-left: 50px;
-    margin-top: -9px;
-    flex: none;
-  }
-  .float-container{
-    position:absolute;inset:0;pointer-events:none;
-    animation:floaty 6s ease-in-out infinite;
-    animation-play-state:paused;
-  }
-  .float-card{
-    display:block;
-    position:absolute;background:rgba(255,255,255,0.9);border:1px solid var(--line);
-    border-radius:14px;padding:16px 18px;backdrop-filter:blur(10px);
-    box-shadow:0 20px 40px -16px rgba(0,0,0,0.06);
-    pointer-events:auto;
-  }
-  .float-card .fc-label{font-size:11px;color:var(--ink-soft);font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
-  .float-card .fc-value{font-family:var(--display);font-size:20px;font-weight:600;color:var(--navy);}
-  .fc1{top:30px;left:0;}
-  .fc2{bottom:40px;left:40px;}
-  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  /* intersection active state */
-  .hero.active-anim .radar-sweep::before,
-  .hero.active-anim .float-container{
-    animation-play-state:running;
-  }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    .radar-sweep::before{animation:none;}
-    .float-container{animation:none;}
-  }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-  /* TRUST BANNER */
-  .trust{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-soft);}
-  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-  .trust-item{display:flex;align-items:center;gap:12px;}
-  .trust-icon{
-    width:38px;height:38px;border-radius:10px;background:rgba(48,130,184,0.08);
-    display:flex;align-items:center;justify-content:center;flex:none;color:var(--steel-blue);
-  }
-  .trust-icon svg{width:18px;height:18px;}
-  .trust-item span{font-size:13.5px;color:var(--ink-soft);font-weight:500;}
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steel-blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
 
-  /* SECTION HEADERS */
-  section{padding:110px 0;}
-  .sec-head{max-width:560px;margin-bottom:56px;}
-  .sec-head h2{font-size:38px;line-height:1.15;color:var(--navy);}
-  .sec-head p{color:var(--ink-soft);font-size:16px;margin-top:14px;}
+    .eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--steel-blue);
+      box-shadow: 0 0 8px var(--steel-blue);
+    }
 
-  /* FIELDS */
-  .fields-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .field-card{
-    display:block;
-    border:1px solid var(--line);border-radius:16px;
-    background:#ffffff;
-    box-shadow:0 4px 20px rgba(0,0,0,0.02);
-    transition:border-color .3s ease, transform .3s ease, background .3s ease, box-shadow .3s ease;
-    overflow:hidden;
-  }
-  .field-card:hover{
-    border-color:var(--teal);
-    transform:translateY(-4px);
-    background:#ffffff;
-    box-shadow:0 20px 40px -12px rgba(45, 189, 182, 0.12);
-  }
-  .field-img-container{
-    height:180px;width:100%;overflow:hidden;position:relative;
-    background:var(--bg-soft);
-  }
-  .field-img-container img{
-    width:100%;height:100%;object-fit:cover;transition:transform .5s ease;
-  }
-  .field-card:hover .field-img-container img{
-    transform:scale(1.05);
-  }
-  .field-content{
-    padding:24px;
-  }
-  .field-card h3{font-size:18px;margin-bottom:8px;color:var(--navy);}
-  .field-card p{font-size:14.5px;color:var(--ink-soft);margin-bottom:16px;line-height:1.6;}
-  .field-pill{
-    font-family:var(--mono);font-size:11px;color:var(--steel-blue);
-    border:1px solid rgba(48,130,184,0.2);padding:4px 10px;border-radius:100px;display:inline-block;
-    background:rgba(48,130,184,0.03);
-  }
+    h1,
+    h2,
+    h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+    }
 
-  /* SERVICES */
-  .services{background:var(--bg-soft);}
-  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-  .service-card{
-    display:block;
-    border:1px solid var(--line);border-radius:16px;padding:32px;position:relative;overflow:hidden;
-    background:#ffffff;
-    box-shadow:0 4px 20px rgba(0,0,0,0.02);
-    transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
-  }
-  .service-card:hover{
-    border-color:var(--teal);
-    transform:translateY(-4px);
-    box-shadow:0 20px 40px -12px rgba(45, 189, 182, 0.12);
-  }
-  .service-card::before{
-    content:'';position:absolute;top:-40%;right:-20%;width:200px;height:200px;border-radius:50%;
-    background:radial-gradient(circle, var(--teal-glow), transparent 70%);opacity:0;transition:opacity .3s ease;
-  }
-  .service-card:hover::before{opacity:1;}
-  .service-card h3{font-size:20px;margin-bottom:10px;position:relative;z-index:2;}
-  .service-card p{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;position:relative;z-index:2;}
-  .chip-row{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2;}
-  .chip{font-size:12px;padding:5px 11px;border-radius:100px;background:rgba(48,130,184,0.06);color:var(--steel-blue);font-weight:500;}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+      white-space: nowrap;
+    }
 
-  /* STATS */
-  .stats{
-    background:#ffffff;
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  }
-  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center;}
-  .stat-num{font-family:var(--display);font-size:52px;font-weight:700;color:var(--steel-blue);letter-spacing:-0.02em;}
-  .stat-label{font-size:14px;color:var(--ink-soft);margin-top:8px;}
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+      color: #fff;
+      box-shadow: 0 0 0 0 var(--teal-glow);
+    }
 
-  /* ENQUIRY */
-  .enquiry{background:var(--bg-main);}
-  .enquiry-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:start;}
-  .enquiry h2{font-size:36px;margin-bottom:16px;}
-  .enquiry-desc{color:var(--ink-soft);font-size:16px;margin-bottom:28px;}
-  .enquiry-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
-  .enquiry-features li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink-soft);}
-  .enquiry-card{
-    border:1px solid var(--line);border-radius:20px;padding:36px;
-    background:#ffffff;
-    box-shadow:0 10px 30px rgba(0,0,0,0.04);
-    text-align:center;
-  }
-  .qr-box{
-    width:168px;height:168px;margin:0 auto 18px;border-radius:14px;
-    background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;
-    border:1px solid var(--line);
-    box-shadow:0 4px 12px rgba(0,0,0,0.02);
-  }
-  .qr-box img{width:100%;height:100%;}
-  .scan-label{font-family:var(--mono);font-size:12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-bottom:22px;}
-  .enquiry-card .btn{width:100%;margin-bottom:10px;}
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px -6px var(--steel-glow), 0 0 0 1px var(--teal);
+    }
 
-  /* CONTACT */
-  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .contact-card{
-    border:1px solid var(--line);border-radius:16px;padding:30px;text-align:center;
-    background:#ffffff;
-    box-shadow:0 4px 20px rgba(0,0,0,0.02);
-    transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
-  }
-  .contact-card:hover{
-    border-color:var(--teal);
-    transform:translateY(-4px);
-    box-shadow:0 20px 40px -12px rgba(45, 189, 182, 0.12);
-  }
-  .contact-icon{
-    width:46px;height:46px;border-radius:50%;background:rgba(48,130,184,0.08);
-    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--steel-blue);
-  }
-  .contact-icon svg{width:22px;height:22px;}
-  .contact-card h3{font-size:16px;margin-bottom:6px;color:var(--navy);}
-  .contact-card p{font-size:13.5px;color:var(--ink-soft);}
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--ink-soft);
+    }
 
-  /* FOOTER */
-  footer{background:var(--navy-deep);border-top:1px solid rgba(255,255,255,0.05);padding:64px 0 28px;color:#ffffff;}
-  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
-  .footer-brand p{font-size:14px;color:rgba(255,255,255,0.7);margin-top:14px;max-width:260px;}
-  .footer-col h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.4);margin-bottom:16px;font-weight:600;}
-  .footer-col a{display:block;font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:11px;transition:color .2s;}
-  .footer-col a:hover{color:var(--teal);}
-  .footer-badge{
-    display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(78,205,196,0.25);
-    background:rgba(78,205,196,0.05);padding:8px 14px;border-radius:100px;font-size:12px;color:var(--teal);margin-top:18px;
-  }
-  .footer-bottom{
-    border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;display:flex;justify-content:space-between;
-    align-items:center;flex-wrap:wrap;gap:12px;
-  }
-  .footer-bottom p{font-size:13px;color:rgba(255,255,255,0.4);}
-  .social-row{display:flex;gap:14px;}
-  .social-row a{
-    width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);
-    display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);transition:.2s;
-  }
-  .social-row a:hover{border-color:var(--teal);color:var(--teal);}
-  .social-row svg{width:15px;height:15px;}
+    .btn-ghost:hover {
+      border-color: var(--steel-blue);
+      color: var(--steel-blue);
+      transform: translateY(-2px);
+    }
 
-  /* HOW IT WORKS */
-  .steps-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:20px;
-  }
-  .step-card{
-    position:relative;border:1px solid var(--line);border-radius:16px;padding:36px 28px;
-    background:#ffffff;
-    display:flex;flex-direction:column;gap:16px;
-    box-shadow:0 4px 20px rgba(0,0,0,0.02);
-    transition:border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .step-card:hover {
-    border-color: var(--teal);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
-  }
-  .step-num{
-    position:absolute;top:24px;right:28px;font-family:var(--mono);font-size:32px;font-weight:700;
-    color:rgba(48,130,184,0.08);
-  }
-  .step-icon{
-    width:44px;height:44px;border-radius:10px;background:rgba(48,130,184,0.08);
-    display:flex;align-items:center;justify-content:center;color:var(--steel-blue);margin-bottom:8px;
-  }
-  .step-icon svg{width:22px;height:22px;}
-  .step-card h3{font-size:18px;margin-bottom:4px;color:var(--navy);}
-  .step-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent-orange), #f97316);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+    }
 
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px -6px rgba(245, 158, 11, 0.3);
+    }
 
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
 
-  /* STICKY MOBILE CTA */
-  .sticky-mobile-cta{
-    position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);
-    backdrop-filter:blur(12px);border-top:1px solid var(--line);
-    padding:12px 24px calc(12px + env(safe-area-inset-bottom));z-index:90;
-    transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
-    display:none;opacity:0;
-  }
-  .sticky-mobile-cta.show{transform:translateY(0);opacity:1;}
-  .sticky-mobile-cta .btn{width:100%;box-shadow:0 0 20px rgba(78, 205, 196, 0.2);}
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  /* MISC */
-  .hero-proof{
-    font-family:var(--mono);font-size:13px;color:var(--steel-blue);margin-top:18px;opacity:0.85;
-  }
-  .enquiry-microcopy{
-    font-size:12px;color:var(--ink-faint);margin:8px 0 16px;line-height:1.4;
-  }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
 
-  /* RESPONSIVE */
-  @media (max-width:980px){
-    .hero-inner{grid-template-columns:1fr;}
-    .hero-visual{height:320px;margin-top:20px;}
-    .float-container{display:none;}
-    .trust-grid{grid-template-columns:repeat(2,1fr);gap:20px;}
-    .fields-grid{grid-template-columns:repeat(2,1fr);}
-    .services-grid{grid-template-columns:1fr;}
-    .steps-grid{grid-template-columns:1fr;gap:20px;}
+      html {
+        scroll-behavior: auto;
+      }
+    }
 
-    .stats-grid{grid-template-columns:1fr;gap:36px;}
-    .enquiry-grid{grid-template-columns:1fr;}
-    .contact-grid{grid-template-columns:1fr;}
-    .footer-top{grid-template-columns:1fr 1fr;}
-  }
-  @media (max-width:680px){
-    .nav-links{display:none;}
-    .nav-cta .btn-ghost{display:none;}
-    .hamburger{display:flex;}
-    .hero{padding:140px 0 80px;}
-    .hero h1{font-size:38px;}
-    .hero-sub{font-size:16px;}
-    .fields-grid{grid-template-columns:1fr;}
-    .enquiry-features{grid-template-columns:1fr;}
-    .sec-head h2{font-size:30px;}
-    .footer-top{grid-template-columns:1fr;gap:32px;}
-    .stat-num{font-size:42px;}
-    .sticky-mobile-cta{display:block;}
-  }
-</style>
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px) saturate(160%);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      flex: none;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(45, 189, 182, 0.25);
+    }
+
+    .logo-text {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text span {
+      font-weight: 400;
+      color: var(--ink-soft);
+      font-size: 13px;
+      display: block;
+      margin-top: -2px;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      position: relative;
+      padding: 4px 0;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--navy);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--steel-blue);
+      transition: width .25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-cta .btn {
+      padding: 10px 22px;
+      font-size: 14px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: .25s;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 78%;
+      max-width: 320px;
+      height: 100vh;
+      background: var(--bg-main);
+      border-left: 1px solid var(--line);
+      padding: 90px 28px 28px;
+      transition: right .35s ease;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .mobile-menu.open {
+      right: 0;
+    }
+
+    .mobile-menu a {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      z-index: 98;
+    }
+
+    .scrim.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero {
+      position: relative;
+      padding: 160px 0 100px;
+      background: radial-gradient(circle at 78% 18%, rgba(78, 205, 196, 0.08), transparent 45%), radial-gradient(circle at 10% 90%, rgba(48, 130, 184, 0.06), transparent 40%), linear-gradient(180deg, var(--bg-main) 0%, var(--bg-soft) 100%);
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(45, 189, 182, 0.08), rgba(48, 130, 184, 0.08));
+      border: 1px solid rgba(45, 189, 182, 0.15);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--teal-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.05;
+      margin-bottom: 18px;
+      color: var(--navy);
+    }
+
+    .hero h1 .hl {
+      color: var(--steel-blue);
+    }
+
+    .hero h1 .hl2 {
+      background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--ink-soft);
+      max-width: 520px;
+      margin-bottom: 24px;
+      line-height: 1.65;
+    }
+
+    .hero-proof {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel-blue);
+    }
+
+    .proof-item svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--ink-soft);
+      list-style: none;
+    }
+
+    .feature-list .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(48, 130, 184, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+
+    .feature-list .check svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 460px;
+    }
+
+    .ai-brain {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 320px;
+    }
+
+    .ai-brain-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(45, 189, 182, 0.3), 0 0 80px rgba(48, 130, 184, 0.15);
+      z-index: 10;
+    }
+
+    .ai-brain-core svg {
+      width: 40px;
+      height: 40px;
+      color: #fff;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(45, 189, 182, 0.15);
+    }
+
+    .orbit-ring:nth-child(2) {
+      width: 160px;
+      height: 160px;
+    }
+
+    .orbit-ring:nth-child(3) {
+      width: 240px;
+      height: 240px;
+    }
+
+    .orbit-ring:nth-child(4) {
+      width: 320px;
+      height: 320px;
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 12px var(--teal);
+    }
+
+    .orbit-ring:nth-child(2) .orbit-dot {
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .orbit-ring:nth-child(3) .orbit-dot {
+      bottom: -4px;
+      left: 30%;
+    }
+
+    .orbit-ring:nth-child(4) .orbit-dot {
+      top: 30%;
+      right: -4px;
+    }
+
+    .float-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.08);
+      animation: floaty 5s ease-in-out infinite;
+    }
+
+    .float-card .fc-label {
+      font-size: 10px;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 3px;
+    }
+
+    .float-card .fc-value {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .float-card .fc-sub {
+      font-size: 11px;
+      color: var(--ink-faint);
+      margin-top: 2px;
+    }
+
+    .fc1 {
+      top: 20px;
+      right: 0;
+      animation-delay: 0s;
+    }
+
+    .fc2 {
+      bottom: 60px;
+      left: 0;
+      animation-delay: 1.5s;
+    }
+
+    .fc3 {
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+      animation-delay: 3s;
+    }
+
+    @keyframes floaty {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .trust {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-soft);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .trust-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(48, 130, 184, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      color: var(--steel-blue);
+    }
+
+    .trust-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .trust-item span {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .sec-head {
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+
+    .sec-head h2 {
+      font-size: 38px;
+      line-height: 1.12;
+      color: var(--navy);
+    }
+
+    .sec-head p {
+      color: var(--ink-soft);
+      font-size: 16px;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    .ai-teaser {
+      background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg-warm) 100%);
+      border-top: 1px solid var(--line-warm);
+      border-bottom: 1px solid var(--line-warm);
+    }
+
+    .teaser-container {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line-warm);
+      border-radius: 24px;
+      padding: 48px 40px;
+      box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .teaser-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--steel-blue), var(--accent-orange));
+    }
+
+    .teaser-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .teaser-head h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .teaser-head p {
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+
+    .teaser-progress {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 36px;
+    }
+
+    .progress-dot {
+      width: 32px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--line);
+      transition: background .3s ease;
+    }
+
+    .progress-dot.active {
+      background: linear-gradient(90deg, var(--teal), var(--steel-blue));
+    }
+
+    .question-card {
+      text-align: center;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .question-card h3 {
+      font-size: 22px;
+      margin-bottom: 28px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .option-btn {
+      padding: 16px 20px;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--ink-soft);
+      font-weight: 500;
+      text-align: left;
+      transition: all .2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option-btn:hover {
+      border-color: var(--teal);
+      background: rgba(45, 189, 182, 0.03);
+      color: var(--navy);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(45, 189, 182, 0.08);
+    }
+
+    .option-btn.selected {
+      border-color: var(--teal);
+      background: rgba(45, 189, 182, 0.06);
+      color: var(--navy);
+    }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--steel-blue);
+      flex: none;
+    }
+
+    .option-btn:hover .option-letter {
+      background: var(--teal-glow);
+      color: var(--teal-dim);
+    }
+
+    .option-btn.selected .option-letter {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .teaser-nav {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .teaser-nav .btn {
+      padding: 12px 28px;
+    }
+
+    .result-card {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .result-card .result-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-glow), var(--steel-glow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      border: 1px solid rgba(45, 189, 182, 0.2);
+    }
+
+    .result-card .result-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--teal);
+    }
+
+    .result-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .result-card .result-desc {
+      font-size: 15px;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .result-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .result-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(48, 130, 184, 0.2);
+      color: var(--steel-blue);
+      background: rgba(48, 130, 184, 0.04);
+    }
+
+    .result-insight {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .result-insight p {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .result-insight strong {
+      color: var(--navy);
+    }
+
+    .confidence-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--line);
+      overflow: hidden;
+      margin: 8px 0 4px;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--steel-blue));
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .confidence-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      text-align: right;
+    }
+
+    .journey {
+      background: var(--bg-main);
+    }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .journey-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 20px;
+      background: #fff;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .journey-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
+    }
+
+    .journey-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--steel-blue));
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .journey-card:hover::before {
+      opacity: 1;
+    }
+
+    .journey-card .step-num {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: rgba(48, 130, 184, 0.08);
+      margin-bottom: 8px;
+    }
+
+    .journey-card .step-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--teal-glow), var(--steel-glow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      border: 1px solid rgba(45, 189, 182, 0.15);
+    }
+
+    .journey-card .step-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--steel-blue);
+    }
+
+    .journey-card h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .journey-card p {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .fields-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .field-card {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: border-color .3s ease, transform .3s ease, background .3s ease, box-shadow .3s ease;
+      overflow: hidden;
+    }
+
+    .field-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      background: #fff;
+      box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
+    }
+
+    .field-img-container {
+      height: 170px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-soft), var(--bg-warm));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .field-img-container .field-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--teal-glow), var(--steel-glow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(45, 189, 182, 0.15);
+    }
+
+    .field-img-container .field-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--steel-blue);
+    }
+
+    .field-content {
+      padding: 22px;
+    }
+
+    .field-card h3 {
+      font-size: 17px;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .field-card p {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .field-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--steel-blue);
+      border: 1px solid rgba(48, 130, 184, 0.2);
+      padding: 4px 10px;
+      border-radius: 100px;
+      display: inline-block;
+      background: rgba(48, 130, 184, 0.03);
+    }
+
+    .services {
+      background: var(--bg-soft);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--teal-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .chip {
+      font-size: 12px;
+      padding: 5px 11px;
+      border-radius: 100px;
+      background: rgba(48, 130, 184, 0.06);
+      color: var(--steel-blue);
+      font-weight: 500;
+    }
+
+    .pricing {
+      background: var(--bg-main);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px 28px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    }
+
+    .pricing-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--teal);
+      transform: scale(1.02);
+      box-shadow: 0 20px 50px -12px rgba(45, 189, 182, 0.15);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.02) translateY(-4px);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 6px 14px;
+      border-radius: 0 0 0 12px;
+      font-weight: 600;
+    }
+
+    .pricing-card h3 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card .price {
+      font-family: var(--display);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 16px 0 4px;
+    }
+
+    .pricing-card .price span {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink-faint);
+    }
+
+    .pricing-card .price-note {
+      font-size: 13px;
+      color: var(--ink-faint);
+      margin-bottom: 24px;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .pricing-card ul li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+    }
+
+    .pricing-card ul li svg {
+      width: 16px;
+      height: 16px;
+      color: var(--teal);
+      flex: none;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+    }
+
+    .stats {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--display);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--steel-blue);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-top: 8px;
+    }
+
+    .stat-change {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--success);
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .enquiry {
+      background: var(--bg-main);
+    }
+
+    .enquiry-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .enquiry h2 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .enquiry-desc {
+      color: var(--ink-soft);
+      font-size: 16px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .enquiry-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .enquiry-features li {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+    }
+
+    .enquiry-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      text-align: center;
+    }
+
+    .qr-box {
+      width: 168px;
+      height: 168px;
+      margin: 0 auto 18px;
+      border-radius: 14px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .scan-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 22px;
+    }
+
+    .enquiry-card .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .enquiry-microcopy {
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin: 8px 0 16px;
+      line-height: 1.4;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .step-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px 28px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
+    }
+
+    .step-num {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-family: var(--mono);
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(48, 130, 184, 0.08);
+    }
+
+    .step-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(48, 130, 184, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--steel-blue);
+      margin-bottom: 8px;
+    }
+
+    .step-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .step-card h3 {
+      font-size: 18px;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .step-card p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    }
+
+    .contact-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(45, 189, 182, 0.12);
+    }
+
+    .contact-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(48, 130, 184, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      color: var(--steel-blue);
+    }
+
+    .contact-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .contact-card h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .contact-card p {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+
+    footer {
+      background: var(--navy-deep);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 64px 0 28px;
+      color: #fff;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 14px;
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 11px;
+      transition: color .2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--teal);
+    }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(78, 205, 196, 0.25);
+      background: rgba(78, 205, 196, 0.05);
+      padding: 8px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--teal);
+      margin-top: 18px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 14px;
+    }
+
+    .social-row a {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      transition: .2s;
+    }
+
+    .social-row a:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .social-row svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .sticky-mobile-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line);
+      padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
+      z-index: 90;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      display: none;
+      opacity: 0;
+    }
+
+    .sticky-mobile-cta.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .sticky-mobile-cta .btn {
+      width: 100%;
+      box-shadow: 0 0 20px rgba(78, 205, 196, 0.2);
+    }
+
+    @media (max-width:980px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        height: 340px;
+        margin-top: 20px;
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .journey-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .fields-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+
+      .pricing-card.featured:hover {
+        transform: translateY(-4px);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px;
+      }
+
+      .enquiry-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width:680px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-cta .btn-ghost {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero {
+        padding: 130px 0 70px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+      }
+
+      .journey-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fields-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .enquiry-features {
+        grid-template-columns: 1fr;
+      }
+
+      .sec-head h2 {
+        font-size: 28px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .stat-num {
+        font-size: 38px;
+      }
+
+      .sticky-mobile-cta {
+        display: block;
+      }
+
+      .teaser-container {
+        padding: 32px 20px;
+      }
+
+      .option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-brain {
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+    }
+  </style>
+  <base target="_blank">
 </head>
+
 <body>
 
-<header>
-  <nav>
-    <a href="#home" class="logo">
-      <img src="Admit_Hunt.jpeg" alt="Admit Hunt Logo" style="width: 160px; height: 42px; object-fit: cover; object-position: center 48%; display: block;">
-    </a>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#fields">Fields</a>
-      <a href="#services">Services</a>
-      <a href="#enquiry">Enquiry</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="nav-cta">
-      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
-        <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
-        <span style="font-family: var(--mono); font-size: 9px; color: var(--teal); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">🔒 No Spam Calls</span>
-      </div>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-</header>
-
-<div class="scrim" id="scrim"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a>
-  <a href="#fields">Fields</a>
-  <a href="#services">Services</a>
-  <a href="#enquiry">Enquiry</a>
-  <a href="#contact">Contact</a>
-  <div style="display: flex; flex-direction: column; gap: 4px; align-items: stretch; margin-top: 8px;">
-    <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
-    <span style="font-family: var(--mono); font-size: 10px; color: var(--teal); font-weight: 600; text-align: center; text-transform: uppercase;">🔒 No Spam Calls</span>
-  </div>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="home" style="padding-top:170px;">
-  <div class="hero-grid"></div>
-  <div class="wrap hero-inner">
-    <div>
-      <div class="eyebrow">Admissions Guidance · India &amp; Abroad</div>
-      <h1>Get Into the Right College — Without Wasting a Year on <span class="hl">Guesswork</span></h1>
-      <p class="hero-sub">Personalized admission strategy for India &amp; Abroad</p>
-
-      <div class="field-tags">
-        <span class="field-tag">Engineering</span>
-        <span class="field-tag">Medical</span>
-        <span class="field-tag">MBA</span>
-        <span class="field-tag">Law</span>
-        <span class="field-tag">Design</span>
-        <span class="field-tag">More</span>
-      </div>
-
-      <ul class="feature-list">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Personalized Counseling</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Global Admissions</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Application Support</li>
-      </ul>
-
-      <div class="hero-ctas">
-        <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Counseling Session</a>
-        <a class="btn btn-ghost" href="#fields">Explore Fields</a>
-      </div>
-      <div class="hero-proof">95% success rate · 50+ partner universities · No spam calls</div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="radar">
-        <div class="radar-sweep"></div>
-        <div class="radar-dot" style="top:22%;left:62%;"></div>
-        <div class="radar-dot" style="top:60%;left:30%;"></div>
-        <div class="radar-dot" style="top:75%;left:68%;"></div>
-        <div class="radar-logo-container">
-          <img src="Admit_Hunt.jpeg" alt="Admit Hunt Icon">
-        </div>
-      </div>
-      <div class="float-container">
-        <a class="float-card fc1" href="#enquiry">
-          <div class="fc-label">Free Counseling</div>
-          <div class="fc-value">Book Session</div>
-        </a>
-        <a class="float-card fc2" href="#fields">
-          <div class="fc-label">Admission Guidance</div>
-          <div class="fc-value">India &amp; Abroad</div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST BANNER -->
-<section class="trust">
-  <div class="wrap trust-grid">
-    <div class="trust-item reveal">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12Zm0 0c-4 0-7.5 2-7.5 5v3h15v-3c0-3-3.5-5-7.5-5Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
-      <span>Personalized Counseling</span>
-    </div>
-    <div class="trust-item reveal">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-4 8 4v11M4 19h16M9 19v-6h6v6" stroke="currentColor" stroke-width="1.6"/></svg></div>
-      <span>College Selection Support</span>
-    </div>
-    <div class="trust-item reveal">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-      <span>Application Strategy</span>
-    </div>
-    <div class="trust-item reveal">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
-      <span>India &amp; Global Admissions</span>
-    </div>
-  </div>
-</section>
-
-<!-- FIELDS -->
-<section id="fields">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Coverage</div>
-      <h2>Fields We Cover</h2>
-      <p>Guidance across the major academic paths students pursue — in India and overseas.</p>
-    </div>
-    <div class="fields-grid">
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-img-container">
-          <img src="engineering_edu.png" alt="Engineering" loading="lazy">
-        </div>
-        <div class="field-content">
-          <h3>Engineering</h3>
-          <p>Secure seats in premier engineering colleges. Complete counseling support for JEE, COMEDK, and direct admissions.</p>
-          <span class="field-pill">India &amp; Abroad</span>
-        </div>
+  <header>
+    <nav>
+      <a href="#home" class="logo">
+        <div class="logo-mark">AH</div>
+        <div class="logo-text">Admit Hunt<span>AI Education OS</span></div>
       </a>
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-img-container">
-          <img src="medical_edu.png" alt="Medical" loading="lazy">
-        </div>
-        <div class="field-content">
-          <h3>Medical</h3>
-          <p>Join top-tier medical colleges. Expert navigation for NEET counseling, MBBS, and allied health sciences.</p>
-          <span class="field-pill">India &amp; Abroad</span>
-        </div>
-      </a>
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-img-container">
-          <img src="mba_edu.png" alt="MBA" loading="lazy">
-        </div>
-        <div class="field-content">
-          <h3>MBA</h3>
-          <p>Get admission into top B-schools in India &amp; Abroad. Expert profile building and interview prep.</p>
-          <span class="field-pill">India &amp; Abroad</span>
-        </div>
-      </a>
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-img-container">
-          <img src="law_edu.png" alt="Law" loading="lazy">
-        </div>
-        <div class="field-content">
-          <h3>Law</h3>
-          <p>Secure admissions in top national law universities (NLUs) and international law schools. Expert CLAT &amp; LSAT guidance.</p>
-          <span class="field-pill">India &amp; Abroad</span>
-        </div>
-      </a>
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-img-container">
-          <img src="design_edu.png" alt="Design" loading="lazy">
-        </div>
-        <div class="field-content">
-          <h3>Design</h3>
-          <p>Join elite design institutes (NID, NIFT, IITs). Portfolio development and design entrance exam guidance.</p>
-          <span class="field-pill">India &amp; Abroad</span>
-        </div>
-      </a>
-
-      <a class="field-card reveal" href="#enquiry">
-        <div class="field-img-container">
-          <img src="more_edu.png" alt="Other Fields" loading="lazy">
-        </div>
-        <div class="field-content">
-          <h3>And More</h3>
-          <p>Guidance for Commerce, Pure Sciences, Architecture, Liberal Arts, and other emerging fields globally.</p>
-          <span class="field-pill">India &amp; Abroad</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">What We Do</div>
-      <h2>Services Built Around You</h2>
-      <p>Four pillars of support, from first conversation to final application.</p>
-    </div>
-    <div class="services-grid">
-
-      <a class="service-card reveal" href="#enquiry">
-        <h3>Personalized Counseling</h3>
-        <p>One-on-one sessions to map your goals, strengths and the paths that genuinely fit you.</p>
-        <div class="chip-row"><span class="chip">1:1 Sessions</span><span class="chip">Goal Mapping</span></div>
-      </a>
-
-      <a class="service-card reveal" href="#enquiry">
-        <h3>College Selection Support</h3>
-        <p>A shortlist built on your profile and preferences — not a generic ranking list.</p>
-        <div class="chip-row"><span class="chip">Shortlisting</span><span class="chip">Profile Match</span></div>
-      </a>
-
-      <a class="service-card reveal" href="#enquiry">
-        <h3>Application &amp; Documentation</h3>
-        <p>End-to-end guidance on application forms, document checklists, and submission timelines.</p>
-        <div class="chip-row"><span class="chip">SOP &amp; Essays</span><span class="chip">Timelines</span></div>
-      </a>
-
-      <a class="service-card reveal" href="#enquiry">
-        <h3>India &amp; Global Admissions</h3>
-        <p>Support across domestic and international application systems and timelines.</p>
-        <div class="chip-row"><span class="chip">Domestic</span><span class="chip">International</span></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ENQUIRY -->
-<section class="enquiry" id="enquiry">
-  <div class="wrap enquiry-grid">
-    <div class="reveal">
-      <div class="eyebrow">Take The First Step</div>
-      <h2>Start Your Admission Enquiry</h2>
-      <p class="enquiry-desc">Engineering, Medical, MBA, Law, Design &amp; more — tell us your goals and we'll take it from there.</p>
-
-      <ul class="enquiry-features">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free consultation</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Profile evaluation</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>College shortlisting</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Application strategy</li>
-      </ul>
-    </div>
-
-    <div class="enquiry-card reveal">
-      <div class="qr-box">
-        <img class="config-qr-code" alt="QR code to enquiry form" loading="lazy">
-      </div>
-      <div class="scan-label">Scan to Apply</div>
-      <div style="margin-bottom: 18px;">
-        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1e293b; background: #f0fdfa; border: 1px solid #ccfbf1; padding: 6px 12px; border-radius: 8px;">
-          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/><path d="m9 12 2 2 4-4"/></svg>
-          We don't do SPAM calls
-        </span>
-      </div>
-      <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Open Google Form</a>
-      <div class="enquiry-microcopy">Takes under 60 seconds · Only relevant updates</div>
-      <a class="btn btn-ghost config-email-href config-email-text">admithunt@gmail.com</a>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how-it-works" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Process</div>
-      <h2>How It Works</h2>
-      <p>Three simple, transparent steps to kickstart your academic future.</p>
-    </div>
-    
-    <div class="steps-grid">
-      <a class="step-card reveal" href="#enquiry">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Zm-2 10H7v-2h10v2Zm0-4H7V7h10v2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Submit your enquiry</h3>
-          <p>Fill out our quick, secure Google Form in under 60 seconds.</p>
-        </div>
-      </a>
-
-      <a class="step-card reveal" href="#enquiry">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Get a free profile evaluation</h3>
-          <p>Our expert consulting team reviews your academic goals and interests.</p>
-        </div>
-      </a>
-
-      <a class="step-card reveal" href="#enquiry">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M9 20h6M12 2v18M12 2a4 4 0 0 1 4 4v3a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Zm-4 9h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Receive your roadmap</h3>
-          <p>Get your custom list of target colleges and scholarship strategies.</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- STATS -->
-<section class="stats">
-  <div class="wrap stats-grid">
-    <div class="reveal">
-      <div class="stat-num" data-target="50" data-suffix="+">0</div>
-      <div class="stat-label">Partner Universities</div>
-    </div>
-    <div class="reveal">
-      <div class="stat-num" data-target="95" data-suffix="%">0</div>
-      <div class="stat-label">Success Rate</div>
-    </div>
-    <div class="reveal">
-      <div class="stat-num" data-target="4" data-suffix="+">0</div>
-      <div class="stat-label">Years Experience</div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- STICKY MOBILE CTA -->
-<div class="sticky-mobile-cta" id="stickyCta">
-  <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
-    <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Book Free Session</a>
-    <span style="font-family: var(--mono); font-size: 10px; color: var(--teal); font-weight: 600; text-transform: uppercase;">🔒 No Spam Calls</span>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<section id="contact" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Reach Us</div>
-      <h2>Let's Talk</h2>
-      <p>Whichever way suits you — we're easy to reach.</p>
-    </div>
-    <div class="contact-grid">
-      <a class="contact-card reveal config-email-href" href="">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6"/></svg></div>
-        <h3>Email</h3>
-        <p class="config-email-text">admithunt@gmail.com</p>
-      </a>
-      <a class="contact-card reveal config-instagram-url" target="_blank" rel="noopener">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></div>
-        <h3>Instagram</h3>
-        <p>@admithunt</p>
-      </a>
-      <a class="contact-card reveal config-form-url" target="_blank" rel="noopener">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <h3>Book Session</h3>
-        <p>Schedule a free call</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#home" class="logo">
-          <div style="background: #ffffff; border-radius: 6px; overflow: hidden; display: inline-flex; align-items: center; height: 38px; width: 140px;">
-            <img src="Admit_Hunt.jpeg" alt="Admit Hunt" style="width: 100%; height: 100%; object-fit: cover; object-position: center 48%;">
-          </div>
-        </a>
-        <p>Hunting the right college for your future — personalized admissions guidance for India and abroad.</p>
-        <div class="footer-badge">
-          <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          No spam, ever
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
+      <div class="nav-links">
         <a href="#home">Home</a>
+        <a href="#assessment">AI Assessment</a>
+        <a href="#journey">Journey</a>
+        <a href="#fields">Fields</a>
         <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
         <a href="#enquiry">Enquiry</a>
-        <a href="#contact">Contact</a>
       </div>
-      <div class="footer-col">
-        <h4>Fields</h4>
-        <a href="#fields">Engineering</a>
-        <a href="#fields">Medical</a>
-        <a href="#fields">MBA</a>
-        <a href="#fields">Law &amp; Design</a>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="#assessment">Start AI Assessment</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a class="config-email-href config-email-text">admithunt@gmail.com</a>
-        <a class="config-instagram-url" target="_blank" rel="noopener">Instagram</a>
-        <a class="config-form-url" target="_blank" rel="noopener">Book a Session</a>
+    </nav>
+  </header>
+
+  <div class="scrim" id="scrim"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#assessment">AI Assessment</a>
+    <a href="#journey">Journey</a>
+    <a href="#fields">Fields</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#enquiry">Enquiry</a>
+    <a class="btn btn-primary" href="#assessment" style="margin-top:8px;">Start AI Assessment</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home" style="padding-top:160px;">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="dot"></span>
+          India's First AI-Powered Education Operating System
+        </div>
+        <h1>Your Personal <span class="hl2">Academic Architect</span> — From Class 8 to <span class="hl">Career</span>
+        </h1>
+        <p class="hero-sub">Not just college admissions. A complete AI decision intelligence platform that learns who
+          you are, predicts your best path, and guides every step — with explainable, data-driven recommendations.</p>
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>AI-powered career & college matching with confidence scores</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>Real-time scholarship & financial aid discovery engine</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>Outcome tracking — what happens after you graduate</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>100% explainable AI — every recommendation shows its reasoning</li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#assessment">Start Free AI Assessment →</a>
+          <a class="btn btn-ghost" href="#journey">See How It Works</a>
+        </div>
+        <div class="hero-proof">
+          <span class="proof-item"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg> 95% admission success rate</span>
+          <span class="proof-item"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg> 50+ partner universities</span>
+          <span class="proof-item"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg> Zero spam calls</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="ai-brain">
+          <div class="orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="ai-brain-core">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26A6.98 6.98 0 0 1 5 9a7 7 0 0 1 7-7Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+              <path d="M9 22h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+        <div class="float-card fc1">
+          <div class="fc-label">AI Match Score</div>
+          <div class="fc-value">94.2%</div>
+          <div class="fc-sub">IIT Bombay — CSE</div>
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-label">Scholarship Found</div>
+          <div class="fc-value">₹2.4L</div>
+          <div class="fc-sub">Merit + Need-based</div>
+        </div>
+        <div class="float-card fc3">
+          <div class="fc-label">Career Outlook</div>
+          <div class="fc-value">₹18L CTC</div>
+          <div class="fc-sub">3 years post-graduation</div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Admit Hunt. All rights reserved.</p>
-      <div class="social-row">
-        <a class="config-instagram-url" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-        <a class="config-email-href" aria-label="Email"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </section>
+
+  <!-- TRUST BANNER -->
+  <section class="trust">
+    <div class="wrap trust-grid">
+      <div class="trust-item reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12Zm0 0c-4 0-7.5 2-7.5 5v3h15v-3c0-3-3.5-5-7.5-5Z"
+              stroke="currentColor" stroke-width="1.6" />
+          </svg></div>
+        <span>AI-Powered Personalization</span>
       </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 19V8l8-4 8 4v11M4 19h16M9 19v-6h6v6" stroke="currentColor" stroke-width="1.6" />
+          </svg></div>
+        <span>Explainable Recommendations</span>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 3Z" stroke="currentColor"
+              stroke-width="1.6" stroke-linejoin="round" />
+          </svg></div>
+        <span>Outcome-Driven Guidance</span>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
+            <path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z"
+              stroke="currentColor" stroke-width="1.6" />
+          </svg></div>
+        <span>India & Global Admissions</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI ASSESSMENT TEASER -->
+  <section class="ai-teaser" id="assessment">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <div class="eyebrow" style="justify-content:center;">Try It Now</div>
+        <h2>3-Minute AI Assessment</h2>
+        <p>Experience how our AI thinks. Answer 3 questions and get a personalized preview of your academic roadmap — no
+          email required.</p>
+      </div>
+      <div class="teaser-container reveal" id="teaserContainer">
+        <div class="teaser-progress" id="teaserProgress">
+          <div class="progress-dot active"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+        </div>
+        <div id="questionArea">
+          <div class="question-card" data-q="1">
+            <h3>What best describes your current academic stage?</h3>
+            <div class="option-grid">
+              <button class="option-btn" data-value="class8-10"><span class="option-letter">A</span>Class 8–10
+                (Exploring options)</button>
+              <button class="option-btn" data-value="class11-12"><span class="option-letter">B</span>Class 11–12
+                (Deciding stream/college)</button>
+              <button class="option-btn" data-value="undergrad"><span class="option-letter">C</span>Undergraduate
+                (Planning next steps)</button>
+              <button class="option-btn" data-value="working"><span class="option-letter">D</span>Working Professional
+                (Upskilling/Career switch)</button>
+            </div>
+          </div>
+        </div>
+        <div class="teaser-nav" id="teaserNav" style="display:none;">
+          <button class="btn btn-ghost" id="prevBtn">← Back</button>
+          <button class="btn btn-primary" id="nextBtn">Next →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY STAGES -->
+  <section class="journey" id="journey">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">The Complete Journey</div>
+        <h2>One Platform. Every Stage.</h2>
+        <p>Unlike other platforms that solve one problem, Admit Hunt connects your entire educational lifecycle into one
+          intelligent ecosystem.</p>
+      </div>
+      <div class="journey-grid">
+        <div class="journey-card reveal">
+          <div class="step-num">01</div>
+          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" />
+              <path
+                d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg></div>
+          <h3>Discover</h3>
+          <p>AI-powered self-discovery. Who are you? What motivates you? What subjects excite you?</p>
+        </div>
+        <div class="journey-card reveal">
+          <div class="step-num">02</div>
+          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" />
+            </svg></div>
+          <h3>Prepare</h3>
+          <p>Smart exam prep with AI tutors. Personalized study plans based on your learning style and goals.</p>
+        </div>
+        <div class="journey-card reveal">
+          <div class="step-num">03</div>
+          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 19V8l8-4 8 4v11M4 19h16M9 19v-6h6v6" stroke="currentColor" stroke-width="1.6" />
+            </svg></div>
+          <h3>Apply</h3>
+          <p>Intelligent college shortlisting with match scores. Auto-filled applications, deadline tracking.</p>
+        </div>
+        <div class="journey-card reveal">
+          <div class="step-num">04</div>
+          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"
+                stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+            </svg></div>
+          <h3>Grow</h3>
+          <p>Skill gap analysis, internship matching, and real-time labor market intelligence.</p>
+        </div>
+        <div class="journey-card reveal">
+          <div class="step-num">05</div>
+          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M22 12h-4l-3 9-6-18-3 9H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></div>
+          <h3>Succeed</h3>
+          <p>Placement support, higher studies guidance, and lifelong career trajectory optimization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELDS -->
+  <section id="fields">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Coverage</div>
+        <h2>Fields We Cover</h2>
+        <p>AI-powered guidance across every major academic path — with real-time data on cutoffs, placements, and ROI.
+        </p>
+      </div>
+      <div class="fields-grid">
+        <a class="field-card reveal" href="#assessment">
+          <div class="field-img-container">
+            <div class="field-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6"
+                  stroke-linejoin="round" />
+              </svg></div>
+          </div>
+          <div class="field-content">
+            <h3>Engineering</h3>
+            <p>JEE, COMEDK, state-level entrances. AI-analyzed placement data for 500+ colleges.</p>
+            <span class="field-pill">AI Match Score Available</span>
+          </div>
+        </a>
+        <a class="field-card reveal" href="#assessment">
+          <div class="field-img-container">
+            <div class="field-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Z"
+                  stroke="currentColor" stroke-width="1.6" />
+                <path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg></div>
+          </div>
+          <div class="field-content">
+            <h3>Medical</h3>
+            <p>NEET counseling, MBBS, BDS, allied health. AI predicts seat availability & cutoff trends.</p>
+            <span class="field-pill">AI Match Score Available</span>
+          </div>
+        </a>
+        <a class="field-card reveal" href="#assessment">
+          <div class="field-img-container">
+            <div class="field-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Z"
+                  stroke="currentColor" stroke-width="1.6" />
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg></div>
+          </div>
+          <div class="field-content">
+            <h3>MBA</h3>
+            <p>CAT, XAT, GMAT. AI profiles your candidacy against 200+ B-schools with ROI analysis.</p>
+            <span class="field-pill">AI Match Score Available</span>
+          </div>
+        </a>
+        <a class="field-card reveal" href="#assessment">
+          <div class="field-img-container">
+            <div class="field-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6"
+                  stroke-linejoin="round" />
+              </svg></div>
+          </div>
+          <div class="field-content">
+            <h3>Law</h3>
+            <p>CLAT, AILET, LSAT. NLU & international law school matching with career outcome data.</p>
+            <span class="field-pill">AI Match Score Available</span>
+          </div>
+        </a>
+        <a class="field-card reveal" href="#assessment">
+          <div class="field-img-container">
+            <div class="field-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 2Z" stroke="currentColor"
+                  stroke-width="1.6" stroke-linejoin="round" />
+              </svg></div>
+          </div>
+          <div class="field-content">
+            <h3>Design</h3>
+            <p>NID, NIFT, IIT-D. Portfolio AI review + entrance strategy with placement tracking.</p>
+            <span class="field-pill">AI Match Score Available</span>
+          </div>
+        </a>
+        <a class="field-card reveal" href="#assessment">
+          <div class="field-img-container">
+            <div class="field-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" />
+                <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" />
+              </svg></div>
+          </div>
+          <div class="field-content">
+            <h3>And More</h3>
+            <p>Commerce, Pure Sciences, Architecture, Liberal Arts, Data Science, AI/ML & emerging fields.</p>
+            <span class="field-pill">AI Match Score Available</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">What We Do</div>
+        <h2>AI-Native Services Built Around You</h2>
+        <p>Every service is powered by our decision intelligence engine — not generic advice, but data-driven
+          recommendations tailored to your unique profile.</p>
+      </div>
+      <div class="services-grid">
+        <a class="service-card reveal" href="#assessment">
+          <h3>AI Career Discovery</h3>
+          <p>Not a generic test. Our AI analyzes your personality, academic history, interests, and India's labor market
+            to predict careers where you'll thrive — with confidence scores and reasoning.</p>
+          <div class="chip-row"><span class="chip">Psychometric AI</span><span class="chip">Labor Market
+              Data</span><span class="chip">Explainable</span></div>
+        </a>
+        <a class="service-card reveal" href="#assessment">
+          <h3>Smart College Matching</h3>
+          <p>AI ranks colleges by YOUR fit — not just rankings. Considers your profile, financial situation, location
+            preference, and career goals with predicted admission probability.</p>
+          <div class="chip-row"><span class="chip">Predictive Modeling</span><span class="chip">ROI Analysis</span><span
+              class="chip">Real-time Cutoffs</span></div>
+        </a>
+        <a class="service-card reveal" href="#assessment">
+          <h3>Application Intelligence</h3>
+          <p>Auto-fill applications, intelligent document checklists, deadline prediction, and submission tracking
+            across India & global portals.</p>
+          <div class="chip-row"><span class="chip">Auto-Fill</span><span class="chip">Deadline AI</span><span
+              class="chip">Multi-Portal</span></div>
+        </a>
+        <a class="service-card reveal" href="#assessment">
+          <h3>Scholarship Engine</h3>
+          <p>AI reverse-matches you to every scholarship you're eligible for — government, private, institutional. Never
+            miss free money again.</p>
+          <div class="chip-row"><span class="chip">Reverse Matching</span><span class="chip">1000+ Crore
+              Database</span><span class="chip">Auto-Apply</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <div class="eyebrow" style="justify-content:center;">Pricing</div>
+        <h2>Simple, Transparent Pricing</h2>
+        <p>Start free. Upgrade when you're ready. No hidden fees. No spam calls. Ever.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <h3>Starter</h3>
+          <p style="font-size:14px;color:var(--ink-soft);margin-top:4px;">For students exploring options</p>
+          <div class="price">Free<span>/forever</span></div>
+          <p class="price-note">No credit card required</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>AI Career Assessment (3 questions)</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Basic college database access</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Scholarship alerts (top 10)</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Community forum access</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Weekly newsletter</li>
+          </ul>
+          <a class="btn btn-ghost" href="#assessment">Get Started Free</a>
+        </div>
+        <div class="pricing-card featured reveal">
+          <div class="pricing-badge">MOST POPULAR</div>
+          <h3>Pro</h3>
+          <p style="font-size:14px;color:var(--ink-soft);margin-top:4px;">For serious aspirants</p>
+          <div class="price">499<span>/month</span></div>
+          <p class="price-note">Billed monthly. Cancel anytime.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Full AI Career Discovery (50+ dimensions)</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Smart College Matching with AI scores</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Full Scholarship Database (1000+ Crore)</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Application Auto-Fill & Tracking</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>1-on-1 AI Counselor Chat</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Placement outcome predictions</li>
+          </ul>
+          <a class="btn btn-primary" href="#assessment">Start Pro Trial</a>
+        </div>
+        <div class="pricing-card reveal">
+          <h3>Elite</h3>
+          <p style="font-size:14px;color:var(--ink-soft);margin-top:4px;">For families who want everything</p>
+          <div class="price">1,999<span>/month</span></div>
+          <p class="price-note">Billed monthly. Family plan included.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Everything in Pro</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Human counselor sessions (4/month)</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Document review & SOP editing</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Interview prep with AI mock sessions</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Priority support (24h response)</li>
+            <li><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>Family dashboard (up to 3 students)</li>
+          </ul>
+          <a class="btn btn-accent" href="#assessment">Go Elite</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="reveal">
+        <div class="stat-num" data-target="50000" data-suffix="+">0</div>
+        <div class="stat-label">AI Assessments Taken</div>
+        <div class="stat-change">+312% this year</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" data-target="95" data-suffix="%">0</div>
+        <div class="stat-label">Admission Success Rate</div>
+        <div class="stat-change">Industry avg: 62%</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" data-target="50" data-suffix="+">0</div>
+        <div class="stat-label">Partner Universities</div>
+        <div class="stat-change">Across India & Abroad</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" data-target="1000" data-suffix="Cr+">0</div>
+        <div class="stat-label">Scholarships Matched</div>
+        <div class="stat-change">Worth of aid discovered</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Process</div>
+        <h2>How It Works</h2>
+        <p>Three simple, transparent steps to kickstart your AI-powered academic future.</p>
+      </div>
+      <div class="steps-grid">
+        <a class="step-card reveal" href="#assessment">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Zm-2 10H7v-2h10v2Zm0-4H7V7h10v2Z"
+                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3>Take the AI Assessment</h3>
+            <p>Answer 50+ dimensions in under 10 minutes. Our AI learns your personality, strengths, goals, and
+              constraints.</p>
+          </div>
+        </a>
+        <a class="step-card reveal" href="#assessment">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor"
+                  stroke-width="1.6" />
+                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3>Get Your AI Roadmap</h3>
+            <p>Receive a personalized academic plan with college matches, scholarship alerts, and career predictions —
+              all with confidence scores.</p>
+          </div>
+        </a>
+        <a class="step-card reveal" href="#assessment">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9 20h6M12 2v18M12 2a4 4 0 0 1 4 4v3a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Zm-4 9h8"
+                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>Execute with AI Support</h3>
+            <p>Apply with auto-fill, track deadlines, get scholarship alerts, and receive ongoing guidance as you grow.
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY -->
+  <section class="enquiry" id="enquiry">
+    <div class="wrap enquiry-grid">
+      <div class="reveal">
+        <div class="eyebrow">Take The First Step</div>
+        <h2>Join the AI Education Revolution</h2>
+        <p class="enquiry-desc">Be among the first 10,000 students to experience India's first AI Education OS. Get
+          early access, exclusive pricing, and direct input into our product roadmap.</p>
+        <ul class="enquiry-features">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>Free AI assessment (full version)</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>Early access to new features</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>Lifetime 50% discount on Pro</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>Direct product feedback channel</li>
+        </ul>
+      </div>
+      <div class="enquiry-card reveal">
+        <div class="qr-box">
+          <img class="config-qr-code" alt="QR code to enquiry form" loading="lazy">
+        </div>
+        <div class="scan-label">Scan to Join Waitlist</div>
+        <div style="margin-bottom: 18px;">
+          <span
+            style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1e293b; background: #f0fdfa; border: 1px solid #ccfbf1; padding: 6px 12px; border-radius: 8px;">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#0d9488" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            We don't do SPAM calls
+          </span>
+        </div>
+        <a class="btn btn-primary config-form-url" target="_blank" rel="noopener">Join Waitlist</a>
+        <div class="enquiry-microcopy">Takes under 60 seconds · Only relevant updates</div>
+        <a class="btn btn-ghost config-email-href config-email-text">admithunt@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Reach Us</div>
+        <h2>Let's Talk</h2>
+        <p>Whichever way suits you — we're easy to reach.</p>
+      </div>
+      <div class="contact-grid">
+        <a class="contact-card reveal config-email-href" href="">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" />
+            </svg></div>
+          <h3>Email</h3>
+          <p class="config-email-text">admithunt@gmail.com</p>
+        </a>
+        <a class="contact-card reveal config-instagram-url" target="_blank" rel="noopener">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6" />
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" />
+              <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+            </svg></div>
+          <h3>Instagram</h3>
+          <p>@admithunt</p>
+        </a>
+        <a class="contact-card reveal config-form-url" target="_blank" rel="noopener">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.6" />
+              <path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg></div>
+          <h3>Book Session</h3>
+          <p>Schedule a free AI assessment</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home" class="logo">
+            <div class="logo-mark">AH</div>
+            <div class="logo-text">Admit Hunt<span>AI Education OS</span></div>
+          </a>
+          <p>India's first AI-powered Education Operating System. Hunting the right path for your future — from Class 8
+            to Career, with explainable, data-driven intelligence.</p>
+          <div class="footer-badge">
+            <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+              <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.6"
+                stroke-linejoin="round" />
+            </svg>
+            No spam, ever. Student-first, always.
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#home">Home</a>
+          <a href="#assessment">AI Assessment</a>
+          <a href="#services">Services</a>
+          <a href="#enquiry">Join Waitlist</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Fields</h4>
+          <a href="#fields">Engineering</a>
+          <a href="#fields">Medical</a>
+          <a href="#fields">MBA</a>
+          <a href="#fields">Law & Design</a>
+          <a href="#fields">More Fields</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a class="config-email-href config-email-text">admithunt@gmail.com</a>
+          <a class="config-instagram-url" target="_blank" rel="noopener">Instagram</a>
+          <a class="config-form-url" target="_blank" rel="noopener">Join Waitlist</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2026 Admit Hunt. All rights reserved. Built with AI in India.</p>
+        <div class="social-row">
+          <a class="config-instagram-url" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6" />
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" />
+            </svg></a>
+          <a class="config-email-href" aria-label="Email"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" />
+            </svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-mobile-cta" id="stickyCta">
+    <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
+      <a class="btn btn-primary" href="#assessment">Start Free AI Assessment</a>
+      <span
+        style="font-family: var(--mono); font-size: 10px; color: var(--teal); font-weight: 600; text-transform: uppercase;">No
+        Spam Calls</span>
     </div>
   </div>
-</footer>
 
-<script>
-  // ⚠ Update CONFIG before deploying to production.
-  const CONFIG = {
-    FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSfTdBadtw9502oyFQC8VqubnFu7jfvHbCLt9PXkrV83IEw7hA/viewform",
-    INSTAGRAM_URL: "https://www.instagram.com/admit__hunt/",
-    EMAIL: "admithunt@gmail.com"
-  };
+  <script>
+    // CONFIG — update before deploying
+    const CONFIG = {
+      FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSfTdBadtw9502oyFQC8VqubnFu7jfvHbCLt9PXkrV83IEw7hA/viewform",
+      INSTAGRAM_URL: "https://www.instagram.com/admit__hunt/",
+      EMAIL: "admithunt@gmail.com"
+    };
 
-  // Dynamic configuration binding
-  function bindConfig() {
-    // 1. Bind Form URLs
-    document.querySelectorAll('.config-form-url').forEach(el => {
-      el.href = CONFIG.FORM_URL;
-    });
-
-    // 2. Bind Instagram URLs
-    document.querySelectorAll('.config-instagram-url').forEach(el => {
-      el.href = CONFIG.INSTAGRAM_URL;
-    });
-
-    // 3. Bind Emails
-    document.querySelectorAll('.config-email-href').forEach(el => {
-      el.href = `mailto:${CONFIG.EMAIL}`;
-    });
-    document.querySelectorAll('.config-email-text').forEach(el => {
-      el.textContent = CONFIG.EMAIL;
-    });
-
-    // 4. Update QR Code source
-    const qrImage = document.querySelector('.config-qr-code');
-    if (qrImage) {
-      const encodedUrl = encodeURIComponent(CONFIG.FORM_URL);
-      qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodedUrl}`;
+    // Dynamic config binding
+    function bindConfig() {
+      document.querySelectorAll('.config-form-url').forEach(el => el.href = CONFIG.FORM_URL);
+      document.querySelectorAll('.config-instagram-url').forEach(el => el.href = CONFIG.INSTAGRAM_URL);
+      document.querySelectorAll('.config-email-href').forEach(el => el.href = `mailto:${CONFIG.EMAIL}`);
+      document.querySelectorAll('.config-email-text').forEach(el => el.textContent = CONFIG.EMAIL);
+      const qrImage = document.querySelector('.config-qr-code');
+      if (qrImage) {
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(CONFIG.FORM_URL)}`;
+      }
     }
-  }
+    bindConfig();
 
-  // Initialize config binding
-  bindConfig();
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const scrim = document.getElementById('scrim');
+    function closeMenu() { mobileMenu.classList.remove('open'); scrim.classList.remove('open'); }
+    hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); scrim.classList.toggle('open'); });
+    scrim.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-  // mobile menu
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const scrim = document.getElementById('scrim');
-  function closeMenu(){mobileMenu.classList.remove('open');scrim.classList.remove('open');}
-  hamburger.addEventListener('click', ()=>{
-    mobileMenu.classList.toggle('open');
-    scrim.classList.toggle('open');
-  });
-  scrim.addEventListener('click', closeMenu);
-  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => io.observe(el));
 
-  // scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, {threshold:0.15});
-  reveals.forEach(el=>io.observe(el));
-
-  // animated counters
-  const counters = document.querySelectorAll('.stat-num');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const countIO = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const el = entry.target;
-        const target = parseFloat(el.dataset.target);
-        const suffix = el.dataset.suffix || '';
-        if(prefersReduced){ el.textContent = target + suffix; countIO.unobserve(el); return; }
-        let start = 0;
-        const duration = 1400;
-        const startTime = performance.now();
-        function tick(now){
-          const progress = Math.min((now-startTime)/duration, 1);
-          const eased = 1 - Math.pow(1-progress, 3);
-          const val = Math.floor(eased * target);
-          el.textContent = val + suffix;
-          if(progress < 1) requestAnimationFrame(tick);
-          else el.textContent = target + suffix;
+    // Animated counters
+    const counters = document.querySelectorAll('.stat-num');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          if (prefersReduced) { el.textContent = target + suffix; countIO.unobserve(el); return; }
+          let start = 0;
+          const duration = 1400;
+          const startTime = performance.now();
+          function tick(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const val = Math.floor(eased * target);
+            el.textContent = val + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.textContent = target + suffix;
+          }
+          requestAnimationFrame(tick);
+          countIO.unobserve(el);
         }
-        requestAnimationFrame(tick);
-        countIO.unobserve(el);
-      }
-    });
-  }, {threshold:0.4});
-  counters.forEach(el=>countIO.observe(el));
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(el => countIO.observe(el));
 
-  // Pause animations when out of view
-  const heroSection = document.getElementById('home');
-  const animObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        heroSection.classList.add('active-anim');
-      } else {
-        heroSection.classList.remove('active-anim');
-      }
-    });
-  }, { threshold: 0.1 });
-  if (heroSection) {
-    animObserver.observe(heroSection);
-  }
-
-  // Sticky Mobile CTA Visibility
-  const stickyCta = document.getElementById('stickyCta');
-  const enquiryCard = document.querySelector('.enquiry-card');
-  let scrolledPastHero = false;
-  let enquiryInView = false;
-
-  function updateStickyCta() {
-    if (scrolledPastHero && !enquiryInView) {
-      stickyCta.classList.add('show');
-    } else {
-      stickyCta.classList.remove('show');
+    // Sticky Mobile CTA
+    const stickyCta = document.getElementById('stickyCta');
+    const enquiryCard = document.querySelector('.enquiry-card');
+    let scrolledPastHero = false;
+    let enquiryInView = false;
+    function updateStickyCta() {
+      if (scrolledPastHero && !enquiryInView) stickyCta.classList.add('show');
+      else stickyCta.classList.remove('show');
     }
-  }
+    window.addEventListener('scroll', () => { scrolledPastHero = window.scrollY > 400; updateStickyCta(); }, { passive: true });
+    const enquiryObserver = new IntersectionObserver((entries) => { entries.forEach(e => { enquiryInView = e.isIntersecting; updateStickyCta(); }); }, { threshold: 0.1 });
+    if (enquiryCard) enquiryObserver.observe(enquiryCard);
 
-  window.addEventListener('scroll', () => {
-    scrolledPastHero = window.scrollY > 400;
-    updateStickyCta();
-  }, { passive: true });
+    // ===== AI ASSESSMENT TEASER =====
+    const questions = [
+      {
+        id: 1,
+        text: "What best describes your current academic stage?",
+        options: [
+          { letter: "A", text: "Class 8–10 (Exploring options)", value: "class8-10" },
+          { letter: "B", text: "Class 11–12 (Deciding stream/college)", value: "class11-12" },
+          { letter: "C", text: "Undergraduate (Planning next steps)", value: "undergrad" },
+          { letter: "D", text: "Working Professional (Upskilling/Career switch)", value: "working" }
+        ]
+      },
+      {
+        id: 2,
+        text: "Which area interests you the MOST?",
+        options: [
+          { letter: "A", text: "Building things & solving technical problems", value: "tech" },
+          { letter: "B", text: "Helping people & healthcare", value: "health" },
+          { letter: "C", text: "Business, strategy & leadership", value: "business" },
+          { letter: "D", text: "Creative design, art & expression", value: "creative" }
+        ]
+      },
+      {
+        id: 3,
+        text: "What's your biggest constraint right now?",
+        options: [
+          { letter: "A", text: "Unclear about which career fits me", value: "unclear" },
+          { letter: "B", text: "Financial — need scholarships/aid", value: "financial" },
+          { letter: "C", text: "Competitive exam pressure & prep", value: "exam" },
+          { letter: "D", text: "Information overload — too many options", value: "overload" }
+        ]
+      }
+    ];
 
-  const enquiryObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      enquiryInView = entry.isIntersecting;
-      updateStickyCta();
+    const results = {
+      "class8-10-tech": {
+        title: "Future Engineer Detected",
+        desc: "Based on your profile, you're in the perfect stage to build a strong foundation. Our AI recommends starting with JEE/NEET foundation courses while exploring robotics and coding.",
+        tags: ["Engineering", "JEE Prep", "Foundation Stage"],
+        insight: "Students who start structured prep in Class 9-10 have 3.2x higher chances of top 1000 ranks in JEE. Our AI will create a personalized 2-year roadmap.",
+        confidence: 87
+      },
+      "class8-10-health": {
+        title: "Future Doctor in the Making",
+        desc: "Your interest in healthcare combined with early exploration stage is ideal. Our AI recommends NEET-focused biology deep-dive + anatomy basics.",
+        tags: ["Medical", "NEET Prep", "Foundation Stage"],
+        insight: "Early biology mastery (Class 9-10) correlates with 40% higher NEET scores. Our AI tracks your progress against top 1000 NEET performers.",
+        confidence: 91
+      },
+      "class8-10-business": {
+        title: "Future Business Leader",
+        desc: "Business interest at this stage is rare and valuable. Our AI recommends commerce stream + early entrepreneurship exposure + data analytics basics.",
+        tags: ["Business", "Commerce", "Early Leader"],
+        insight: "Students with early business exposure are 2.5x more likely to get into top B-schools. Our AI will track your leadership milestones.",
+        confidence: 84
+      },
+      "class8-10-creative": {
+        title: "Creative Mind Detected",
+        desc: "Your creative inclination is a strong signal. Our AI recommends NID/NIFT preparation track + portfolio building starting now.",
+        tags: ["Design", "NID/NIFT", "Portfolio Build"],
+        insight: "Design portfolios started in Class 9-10 show 60% more depth than those started in Class 12. Our AI will guide your creative journey.",
+        confidence: 89
+      },
+      "class11-12-tech-unclear": {
+        title: "Engineering Path — High Confidence",
+        desc: "You're at the critical decision point. Our AI strongly recommends Computer Science/IT based on current market trends and your profile alignment.",
+        tags: ["Engineering", "CSE/IT", "JEE Target"],
+        insight: "CSE graduates from top 50 colleges have 94% placement rate with avg CTC of 12.5L. Our AI has matched you with 12 target colleges.",
+        confidence: 92
+      },
+      "class11-12-tech-financial": {
+        title: "Engineering + Scholarship Strategy",
+        desc: "Your tech interest + financial need is a powerful combination. Our AI has identified 8 scholarships worth 4.2L specifically for your profile.",
+        tags: ["Engineering", "Scholarships", "Need-based Aid"],
+        insight: "Students with our scholarship matching get 3x more aid than manual searchers. Our AI has already found 8 matches for you.",
+        confidence: 88
+      },
+      "class11-12-health-unclear": {
+        title: "Medical Path — Strong Alignment",
+        desc: "Your healthcare interest at this stage is well-aligned. Our AI recommends MBBS with backup options in BDS and allied health sciences.",
+        tags: ["Medical", "MBBS", "NEET Target"],
+        insight: "NEET 2026 expected cutoff: 720 for AIIMS Delhi. Our AI predicts your required score based on current prep level and suggests gap-closing strategy.",
+        confidence: 90
+      },
+      "class11-12-business-exam": {
+        title: "MBA Track — Start Early",
+        desc: "Business interest + exam pressure means you need a dual strategy. Our AI recommends CAT prep alongside undergrad college selection for maximum ROI.",
+        tags: ["MBA", "CAT Prep", "B-school Target"],
+        insight: "Students who start CAT prep in undergrad Year 1 score 15% higher than those starting in final year. Our AI will build your 4-year plan.",
+        confidence: 86
+      },
+      "undergrad-tech-overload": {
+        title: "Data Science / AI-ML Pivot",
+        desc: "Information overload is common for undergrads. Our AI cuts through noise: Data Science/AI-ML has 400% job growth in India. Strong pivot recommendation.",
+        tags: ["Data Science", "AI/ML", "Career Pivot"],
+        insight: "AI/ML roles in India grew from 45K to 180K in 2 years. Our AI predicts this will reach 500K by 2028. Your timing is perfect.",
+        confidence: 93
+      },
+      "working-business-financial": {
+        title: "Executive MBA / Upskill Path",
+        desc: "Working professional + business interest + financial constraints = Executive MBA or targeted upskilling. Our AI recommends ISB PGPpro or IIM Executive.",
+        tags: ["Executive MBA", "Working Pro", "ROI Focus"],
+        insight: "Executive MBA graduates see avg 80% salary hike within 18 months. Our AI will calculate your exact ROI based on current salary and target program.",
+        confidence: 85
+      }
+    };
+
+    let currentQ = 0;
+    let answers = [];
+    const questionArea = document.getElementById('questionArea');
+    const teaserNav = document.getElementById('teaserNav');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+
+    function renderQuestion(idx) {
+      const q = questions[idx];
+      let html = `<div class="question-card" data-q="${q.id}"><h3>${q.text}</h3><div class="option-grid">`;
+      q.options.forEach(opt => {
+        const selected = answers[idx] === opt.value ? 'selected' : '';
+        html += `<button class="option-btn ${selected}" data-value="${opt.value}"><span class="option-letter">${opt.letter}</span>${opt.text}</button>`;
+      });
+      html += '</div></div>';
+      questionArea.innerHTML = html;
+
+      // Re-attach click handlers
+      questionArea.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          questionArea.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          answers[idx] = this.dataset.value;
+          teaserNav.style.display = 'flex';
+          if (idx === questions.length - 1) {
+            nextBtn.textContent = 'See My Result →';
+          }
+        });
+      });
+
+      // Update progress
+      progressDots.forEach((dot, i) => dot.classList.toggle('active', i <= idx));
+
+      // Show/hide nav
+      if (answers[idx]) teaserNav.style.display = 'flex';
+      else teaserNav.style.display = 'none';
+
+      prevBtn.style.display = idx === 0 ? 'none' : 'inline-flex';
+      nextBtn.textContent = idx === questions.length - 1 ? 'See My Result →' : 'Next →';
+    }
+
+    function showResult() {
+      const key = `${answers[0]}-${answers[1]}-${answers[2]}`;
+      const altKey = `${answers[0]}-${answers[1]}`;
+      const result = results[key] || results[altKey] || {
+        title: "Personalized Roadmap Ready",
+        desc: "Your unique combination requires a custom analysis. Our AI is generating your personalized academic roadmap based on your responses.",
+        tags: ["Custom Analysis", "Personalized Plan", "AI-Generated"],
+        insight: "Every student's path is unique. Our full assessment analyzes 50+ dimensions to create your perfect roadmap. Join the waitlist for complete access.",
+        confidence: 78
+      };
+
+      let html = `<div class="result-card">
+      <div class="result-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>${result.title}</h3>
+      <p class="result-desc">${result.desc}</p>
+      <div class="result-tags">${result.tags.map(t => `<span class="result-tag">${t}</span>`).join('')}</div>
+      <div class="result-insight">
+        <p><strong>AI Insight:</strong> ${result.insight}</p>
+        <div class="confidence-bar"><div class="confidence-fill" style="width:0%"></div></div>
+        <div class="confidence-label">AI Confidence: ${result.confidence}%</div>
+      </div>
+      <a class="btn btn-primary" href="#enquiry">Get Full Roadmap →</a>
+      <p style="font-size:12px;color:var(--ink-faint);margin-top:12px;">This is a preview. Full assessment analyzes 50+ dimensions.</p>
+    </div>`;
+
+      questionArea.innerHTML = html;
+      teaserNav.style.display = 'none';
+      progressDots.forEach(d => d.classList.add('active'));
+
+      // Animate confidence bar
+      setTimeout(() => {
+        const fill = document.querySelector('.confidence-fill');
+        if (fill) fill.style.width = result.confidence + '%';
+      }, 100);
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (!answers[currentQ]) return;
+      if (currentQ < questions.length - 1) {
+        currentQ++;
+        renderQuestion(currentQ);
+      } else {
+        showResult();
+      }
     });
-  }, { threshold: 0.1 });
 
-  if (enquiryCard) {
-    enquiryObserver.observe(enquiryCard);
-  }
-</script>
+    prevBtn.addEventListener('click', () => {
+      if (currentQ > 0) {
+        currentQ--;
+        renderQuestion(currentQ);
+      }
+    });
+
+    // Initial render
+    renderQuestion(0);
+  </script>
 
 </body>
+
 </html>
