@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admit Hunt — Lekhan's Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-deep: #050b14;
+            --navy-mid: #111d2e;
+            --teal: #2dbdb6;
+            --teal-dim: #219690;
+            --teal-glow: rgba(45, 189, 182, 0.15);
+            --teal-bright: #4ecdc4;
+            --steel-blue: #3082b8;
+            --steel-glow: rgba(48, 130, 184, 0.15);
+            --steel-soft: #4a9fd4;
+            --bg-main: #0d1117;
+            --bg-surface: #161b22;
+            --bg-elevated: #1c2128;
+            --bg-hover: #21262d;
+            --ink: #e6edf3;
+            --ink-soft: #8b949e;
+            --ink-faint: #6e7681;
+            --ink-dim: #484f58;
+            --line: #30363d;
+            --line-subtle: #21262d;
+            --accent-orange: #f0883e;
+            --accent-orange-glow: rgba(240, 136, 62, 0.15);
+            --accent-rose: #f778ba;
+            --accent-rose-glow: rgba(247, 120, 186, 0.15);
+            --accent-green: #3fb950;
+            --accent-green-glow: rgba(63, 185, 80, 0.15);
+            --accent-purple: #a371f7;
+            --accent-purple-glow: rgba(163, 113, 247, 0.15);
+            --accent-yellow: #d29922;
+            --accent-yellow-glow: rgba(210, 153, 34, 0.15);
+            --display: 'Space Grotesk', sans-serif;
+            --body: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --r: 8px;
+            --r-md: 12px;
+            --r-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-main);
+            color: var(--ink);
+            font-family: var(--body);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--line);
+            border-radius: 3px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ===== LAYOUT ===== */
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 50;
+            overflow-y: auto;
+        }
+
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            min-width: 0;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sb-head {
+            padding: 20px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--line-subtle);
+        }
+
+        .sb-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .sb-brand {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--ink);
+        }
+
+        .sb-brand span {
+            display: block;
+            font-size: 11px;
+            color: var(--ink-faint);
+            font-weight: 400;
+        }
+
+        .sb-nav {
+            flex: 1;
+            padding: 12px;
+        }
+
+        .sb-sec {
+            margin-bottom: 20px;
+        }
+
+        .sb-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .sb-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: var(--r);
+            color: var(--ink-soft);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .2s;
+            margin-bottom: 2px;
+            position: relative;
+        }
+
+        .sb-item:hover {
+            background: var(--bg-hover);
+            color: var(--ink);
+        }
+
+        .sb-item.active {
+            background: var(--teal-glow);
+            color: var(--teal-bright);
+            border: 1px solid rgba(45, 189, 182, 0.2);
+        }
+
+        .sb-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .sb-item svg {
+            width: 18px;
+            height: 18px;
+            flex: none;
+        }
+
+        .sb-badge {
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 100px;
+            background: var(--accent-rose-glow);
+            color: var(--accent-rose);
+            margin-left: auto;
+        }
+
+        .sb-badge.g {
+            background: var(--accent-green-glow);
+            color: var(--accent-green);
+        }
+
+        .sb-badge.p {
+            background: var(--accent-purple-glow);
+            color: var(--accent-purple);
+        }
+
+        .sb-foot {
+            padding: 16px 20px;
+            border-top: 1px solid var(--line-subtle);
+        }
+
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--r);
+            transition: background .2s;
+        }
+
+        .user:hover {
+            background: var(--bg-hover);
+        }
+
+        .user-av {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal), var(--steel-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--ink-faint);
+        }
+
+        .user-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 6px var(--accent-green);
+        }
+
+        /* ===== TOPBAR ===== */
+        .topbar {
+            height: 60px;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+
+        .greeting {
+            font-family: var(--display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .greeting span {
+            color: var(--teal-bright);
+        }
+
+        .greeting .time {
+            color: var(--ink-faint);
+            font-weight: 400;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--line);
+            border-radius: var(--r-md);
+            width: 320px;
+        }
+
+        .search:focus-within {
+            border-color: var(--steel-blue);
+            box-shadow: 0 0 0 3px var(--steel-glow);
+        }
+
+        .search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--ink);
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .search input::placeholder {
+            color: var(--ink-faint);
+        }
+
+        .search svg {
+            width: 16px;
+            height: 16px;
+            color: var(--ink-faint);
+            flex: none;
+        }
+
+        .search kbd {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ink-faint);
+            padding: 2px 6px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+        }
+
+        .ibtn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r);
+            background: var(--bg-elevated);
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+        }
+
+        .ibtn:hover {
+            background: var(--bg-hover);
+            color: var(--ink);
+            border-color: var(--steel-blue);
+        }
+
+        .ibtn .dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-rose);
+            box-shadow: 0 0 6px var(--accent-rose);
+        }
+
+        .ibtn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ===== CONTENT ===== */
+        .cc {
+            padding: 24px 28px 40px;
+        }
+
+        .cc-head {
+            margin-bottom: 24px;
+        }
+
+        .cc-head h1 {
+            font-family: var(--display);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .cc-head p {
+            color: var(--ink-soft);
+            font-size: 14px;
+        }
+
+        .cc-head p strong {
+            color: var(--teal-bright);
+            font-weight: 600;
+        }
+
+        /* ===== WIDGET GRID - EXPLICIT 4-COLUMN ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .w {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            transition: box-shadow .2s, border-color .2s;
+        }
+
+        .w:hover {
+            border-color: var(--line);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .w-h {
+            padding: 16px 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .w-t {
+            font-family: var(--display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .w-t svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .w-a {
+            display: flex;
+            gap: 6px;
+        }
+
+        .w-a-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-faint);
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .w-a-btn:hover {
+            background: var(--bg-hover);
+            color: var(--ink);
+        }
+
+        .w-a-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .w-b {
+            padding: 12px 20px 16px;
+        }
+
+        /* Column spans */
+        .c1 {
+            grid-column: span 1;
+        }
+
+        .c2 {
+            grid-column: span 2;
+        }
+
+        .c3 {
+            grid-column: span 3;
+        }
+
+        .c4 {
+            grid-column: span 4;
+        }
+
+        @media(max-width:1400px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .c2,
+            .c3,
+            .c4 {
+                grid-column: span 3;
+            }
+
+            .c1 {
+                grid-column: span 1;
+            }
+        }
+
+        @media(max-width:1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .c1,
+            .c2,
+            .c3,
+            .c4 {
+                grid-column: span 2;
+            }
+        }
+
+        @media(max-width:768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .c1,
+            .c2,
+            .c3,
+            .c4 {
+                grid-column: span 1;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .search {
+                display: none;
+            }
+        }
+
+        /* ===== COMPONENTS ===== */
+        .ring-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .ring-wrap svg {
+            transform: rotate(-90deg);
+        }
+
+        .ring-bg {
+            fill: none;
+            stroke: var(--line);
+            stroke-width: 8;
+        }
+
+        .ring-fill {
+            fill: none;
+            stroke: url(#gradTeal);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ring-pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--teal-bright);
+        }
+
+        .ring-label {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--ink-soft);
+        }
+
+        .ring-sub {
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ink-faint);
+            margin-top: 4px;
+        }
+
+        .rank-n {
+            font-family: var(--display);
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--teal-bright);
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        .rank-r {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--ink-soft);
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .rank-e {
+            font-size: 12px;
+            color: var(--ink-faint);
+            text-align: center;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--bg-elevated);
+            border-radius: 100px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .rank-t {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--accent-green);
+        }
+
+        .rank-t svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .prob {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--line-subtle);
+        }
+
+        .prob:last-child {
+            border-bottom: none;
+        }
+
+        .prob-c {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .prob-n {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .prob-b {
+            font-size: 11px;
+            color: var(--ink-faint);
+        }
+
+        .prob-bar-w {
+            width: 100px;
+            height: 6px;
+            background: var(--line-subtle);
+            border-radius: 3px;
+            overflow: hidden;
+            flex: none;
+        }
+
+        .prob-bar-f {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .prob-bar-f.hi {
+            background: linear-gradient(90deg, var(--accent-green), #56d364);
+        }
+
+        .prob-bar-f.md {
+            background: linear-gradient(90deg, var(--accent-yellow), #e3b341);
+        }
+
+        .prob-bar-f.lo {
+            background: linear-gradient(90deg, var(--accent-rose), #f778ba);
+        }
+
+        .prob-p {
+            font-family: var(--mono);
+            font-size: 12px;
+            font-weight: 600;
+            min-width: 36px;
+            text-align: right;
+        }
+
+        .prob-p.hi {
+            color: var(--accent-green);
+        }
+
+        .prob-p.md {
+            color: var(--accent-yellow);
+        }
+
+        .prob-p.lo {
+            color: var(--accent-rose);
+        }
+
+        .schol-a {
+            font-family: var(--display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+
+        .schol-a span {
+            font-size: 14px;
+            color: var(--ink-faint);
+            font-weight: 400;
+        }
+
+        .schol-i {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--line-subtle);
+        }
+
+        .schol-i:last-child {
+            border-bottom: none;
+        }
+
+        .schol-d {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+            box-shadow: 0 0 8px var(--accent-orange-glow);
+            flex: none;
+        }
+
+        .schol-d.ap {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green-glow);
+        }
+
+        .schol-n {
+            font-size: 13px;
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .schol-de {
+            font-size: 11px;
+            color: var(--ink-faint);
+        }
+
+        .schol-v {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        .act {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line-subtle);
+            cursor: pointer;
+            transition: background .2s;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .act:hover {
+            background: var(--bg-hover);
+        }
+
+        .act:last-child {
+            border-bottom: none;
+        }
+
+        .act-ic {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+        }
+
+        .act-ic.u {
+            background: var(--accent-rose-glow);
+            color: var(--accent-rose);
+        }
+
+        .act-ic.w {
+            background: var(--accent-yellow-glow);
+            color: var(--accent-yellow);
+        }
+
+        .act-ic.i {
+            background: var(--accent-purple-glow);
+            color: var(--accent-purple);
+        }
+
+        .act-ic.s {
+            background: var(--accent-green-glow);
+            color: var(--accent-green);
+        }
+
+        .act-ic svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .act-c {
+            flex: 1;
+        }
+
+        .act-t {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .act-d {
+            font-size: 12px;
+            color: var(--ink-soft);
+            line-height: 1.4;
+        }
+
+        .act-m {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ink-faint);
+            margin-top: 4px;
+        }
+
+        .act-b {
+            padding: 6px 12px;
+            border-radius: var(--r);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            flex: none;
+        }
+
+        .act-b.p {
+            background: var(--teal);
+            color: var(--navy-deep);
+        }
+
+        .act-b.g {
+            background: transparent;
+            border-color: var(--line);
+            color: var(--ink-soft);
+        }
+
+        .act-b:hover {
+            opacity: 0.9;
+        }
+
+        .tl {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .tl::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: var(--line);
+            border-radius: 1px;
+        }
+
+        .tl-i {
+            position: relative;
+            padding-bottom: 16px;
+        }
+
+        .tl-i:last-child {
+            padding-bottom: 0;
+        }
+
+        .tl-d {
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-surface);
+        }
+
+        .tl-d.done {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green-glow);
+        }
+
+        .tl-d.act {
+            background: var(--teal);
+            box-shadow: 0 0 10px var(--teal-glow);
+            animation: pulse 2s infinite;
+        }
+
+        .tl-d.pen {
+            background: var(--line);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(45, 189, 182, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(45, 189, 182, 0);
+            }
+        }
+
+        .tl-c {
+            padding-left: 8px;
+        }
+
+        .tl-t {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .tl-t.done {
+            color: var(--ink-soft);
+            text-decoration: line-through;
+        }
+
+        .tl-da {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ink-faint);
+            margin-top: 2px;
+        }
+
+        .tl-da.ur {
+            color: var(--accent-rose);
+        }
+
+        .tl-da.to {
+            color: var(--teal-bright);
+        }
+
+        .rec {
+            background: linear-gradient(135deg, rgba(45, 189, 182, 0.08), rgba(48, 130, 184, 0.08));
+            border: 1px solid rgba(45, 189, 182, 0.2);
+            border-radius: var(--r-md);
+            padding: 16px 20px;
+        }
+
+        .rec-h {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .rec-b {
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: var(--teal-glow);
+            color: var(--teal-bright);
+            border: 1px solid rgba(45, 189, 182, 0.3);
+        }
+
+        .rec-t {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .rec-d {
+            font-size: 13px;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .rec-imp {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(45, 189, 182, 0.06);
+            border-radius: var(--r);
+            border: 1px solid rgba(45, 189, 182, 0.15);
+        }
+
+        .rec-imp svg {
+            width: 16px;
+            height: 16px;
+            color: var(--teal);
+        }
+
+        .rec-imp-t {
+            font-size: 12px;
+            color: var(--teal-bright);
+            font-weight: 500;
+        }
+
+        .rec-a {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .rec-a .btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            border-radius: var(--r);
+        }
+
+        .career-ring {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .career-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .career-pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+
+        .career-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .career-n {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .career-s {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ink-faint);
+            margin-top: 2px;
+        }
+
+        .career-sk {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .career-sk span {
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: var(--accent-purple-glow);
+            color: var(--accent-purple);
+            border: 1px solid rgba(163, 113, 247, 0.2);
+        }
+
+        .chart-h {
+            height: 140px;
+            position: relative;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 110px;
+            padding-top: 20px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            min-width: 20px;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+        }
+
+        .chart-bar-l {
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ink-faint);
+            white-space: nowrap;
+        }
+
+        .chart-bar-v {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ink-soft);
+        }
+
+        .chart-leg {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .chart-leg span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--ink-soft);
+        }
+
+        .chart-leg i {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .graph {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .graph-n {
+            position: absolute;
+            padding: 6px 12px;
+            border-radius: var(--r-md);
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all .3s;
+            cursor: pointer;
+        }
+
+        .graph-n:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .graph-n.stu {
+            background: var(--teal-glow);
+            color: var(--teal-bright);
+            border: 1px solid rgba(45, 189, 182, 0.3);
+        }
+
+        .graph-n.car {
+            background: var(--accent-purple-glow);
+            color: var(--accent-purple);
+            border: 1px solid rgba(163, 113, 247, 0.3);
+        }
+
+        .graph-n.ski {
+            background: var(--accent-green-glow);
+            color: var(--accent-green);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+
+        .graph-n.exa {
+            background: var(--accent-yellow-glow);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(210, 153, 34, 0.3);
+        }
+
+        .graph-n.col {
+            background: var(--accent-orange-glow);
+            color: var(--accent-orange);
+            border: 1px solid rgba(240, 136, 62, 0.3);
+        }
+
+        .graph-n.sch {
+            background: var(--accent-rose-glow);
+            color: var(--accent-rose);
+            border: 1px solid rgba(247, 120, 186, 0.3);
+        }
+
+        .graph-n.com {
+            background: var(--steel-glow);
+            color: var(--steel-soft);
+            border: 1px solid rgba(74, 159, 212, 0.3);
+        }
+
+        .graph-l {
+            position: absolute;
+            height: 2px;
+            background: var(--line);
+            transform-origin: left center;
+            transition: all .3s;
+        }
+
+        .graph-l.act {
+            background: linear-gradient(90deg, var(--teal), var(--steel-blue));
+            box-shadow: 0 0 8px var(--teal-glow);
+        }
+
+        .opp {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-elevated);
+            border-radius: var(--r-md);
+            border: 1px solid var(--line);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .opp:hover {
+            border-color: var(--teal);
+            background: var(--bg-hover);
+        }
+
+        .opp:last-child {
+            margin-bottom: 0;
+        }
+
+        .opp-ic {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+        }
+
+        .opp-ic.sch {
+            background: var(--accent-orange-glow);
+            color: var(--accent-orange);
+        }
+
+        .opp-ic.int {
+            background: var(--accent-purple-glow);
+            color: var(--accent-purple);
+        }
+
+        .opp-ic.imp {
+            background: var(--accent-green-glow);
+            color: var(--accent-green);
+        }
+
+        .opp-ic.hack {
+            background: var(--accent-yellow-glow);
+            color: var(--accent-yellow);
+        }
+
+        .opp-ic svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .opp-c {
+            flex: 1;
+        }
+
+        .opp-t {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .opp-d {
+            font-size: 12px;
+            color: var(--ink-soft);
+            line-height: 1.4;
+        }
+
+        .opp-im {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--teal-bright);
+            margin-top: 4px;
+        }
+
+        .opp-ar {
+            color: var(--ink-faint);
+            align-self: center;
+        }
+
+        .mot-q {
+            font-family: var(--display);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .mot-q::before {
+            content: '"';
+            color: var(--teal);
+            font-size: 24px;
+            line-height: 0;
+            vertical-align: -8px;
+            margin-right: 4px;
+        }
+
+        .mot-a {
+            font-size: 12px;
+            color: var(--ink-faint);
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .mot-st {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--line-subtle);
+        }
+
+        .mot-st span {
+            font-size: 12px;
+            color: var(--ink-soft);
+        }
+
+        .mot-st strong {
+            color: var(--accent-orange);
+        }
+
+        .mob-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--line);
+            z-index: 100;
+        }
+
+        .mob-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+        }
+
+        .mob-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: var(--ink-faint);
+            font-size: 10px;
+            cursor: pointer;
+            padding: 8px 12px;
+            position: relative;
+        }
+
+        .mob-item.active {
+            color: var(--teal-bright);
+        }
+
+        .mob-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .mob-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-rose);
+            position: absolute;
+            top: 6px;
+            right: calc(50% - 14px);
+        }
+
+        @media(max-width:768px) {
+            .mob-nav {
+                display: block;
+            }
+
+            .cc {
+                padding-bottom: 80px;
+            }
+
+            .greeting {
+                font-size: 16px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .anim {
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .d1 {
+            animation-delay: 0.1s;
+        }
+
+        .d2 {
+            animation-delay: 0.2s;
+        }
+
+        .d3 {
+            animation-delay: 0.3s;
+        }
+
+        .d4 {
+            animation-delay: 0.4s;
+        }
+
+        .d5 {
+            animation-delay: 0.5s;
+        }
+
+        .w-scroll {
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .w-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .w-scroll::-webkit-scrollbar-thumb {
+            background: var(--line);
+            border-radius: 2px;
+        }
+
+        [data-tip] {
+            position: relative;
+        }
+
+        [data-tip]::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 10px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            font-size: 11px;
+            color: var(--ink);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+            margin-bottom: 6px;
+            z-index: 100;
+        }
+
+        [data-tip]:hover::after {
+            opacity: 1;
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+<body>
+
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <linearGradient id="gradTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#2dbdb6" />
+                <stop offset="100%" style="stop-color:#3082b8" />
+            </linearGradient>
+            <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#a371f7" />
+                <stop offset="100%" style="stop-color:#8957e5" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sb-head">
+                <div class="sb-logo">AH</div>
+                <div class="sb-brand">Admit Hunt<span>Your Education OS</span></div>
+            </div>
+            <nav class="sb-nav">
+                <div class="sb-sec">
+                    <div class="sb-label">Command Center</div>
+                    <div class="sb-item active">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" stroke="currentColor"
+                                stroke-width="1.6" stroke-linejoin="round" />
+                            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                        </svg>
+                        Home
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" />
+                            <path
+                                d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                        Discover Yourself
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="1.6"
+                                stroke-linejoin="round" />
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6"
+                                stroke-linejoin="round" />
+                        </svg>
+                        Your Best-Fit Colleges
+                        <span class="sb-badge">3</span>
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 2Z"
+                                stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                        </svg>
+                        Funding Finder
+                        <span class="sb-badge g">7</span>
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M22 12h-4l-3 9-6-18-3 9H2" stroke="currentColor" stroke-width="1.6"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Mission Timeline
+                        <span class="sb-badge p">4</span>
+                    </div>
+                </div>
+                <div class="sb-sec">
+                    <div class="sb-label">Prepare & Grow</div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 19V8l8-4 8 4v11M4 19h16M9 19v-6h6v6" stroke="currentColor" stroke-width="1.6" />
+                        </svg>
+                        Mock Tests & Prep
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Z"
+                                stroke="currentColor" stroke-width="1.6" />
+                            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                        Skill Tracker
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+                                stroke="currentColor" stroke-width="1.6" />
+                        </svg>
+                        Internship Matcher
+                    </div>
+                </div>
+                <div class="sb-sec">
+                    <div class="sb-label">Intelligence</div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26A6.98 6.98 0 0 1 5 9a7 7 0 0 1 7-7Z"
+                                stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                            <path d="M9 22h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        Ask Anything
+                    </div>
+                    <div class="sb-item">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.6"
+                                stroke-linecap="round" />
+                        </svg>
+                        Insights & Reports
+                    </div>
+                </div>
+            </nav>
+            <div class="sb-foot">
+                <div class="user">
+                    <div class="user-av">L</div>
+                    <div style="flex:1;min-width:0;">
+                        <div class="user-name">Lekhan</div>
+                        <div class="user-role">Class 12 · Science</div>
+                    </div>
+                    <div class="user-status"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <header class="topbar">
+                <div class="greeting">Welcome back, <span>Lekhan</span><span class="time"> · 7:42 AM</span></div>
+                <div class="topbar-right">
+                    <div class="search">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6" />
+                            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6"
+                                stroke-linecap="round" />
+                        </svg>
+                        <input type="text" placeholder="Search colleges, scholarships, careers...">
+                        <kbd>⌘K</kbd>
+                    </div>
+                    <button class="ibtn" data-tip="Notifications">
+                        <span class="dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M6 8a6 6 0 0 1 12 0v5a2 2 0 0 0 2 2H4a2 2 0 0 0 2-2V8Z" stroke="currentColor"
+                                stroke-width="1.6" stroke-linejoin="round" />
+                            <path d="M10 18v2M14 18v2M9 8h6" stroke="currentColor" stroke-width="1.6"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <button class="ibtn" data-tip="Settings">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" />
+                            <path
+                                d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
+                                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <div class="cc">
+
+                <div class="cc-head anim">
+                    <h1>Your Mission Control</h1>
+                    <p>You are <strong>73% prepared</strong> for KCET. 3 applications need action. 7 scholarship
+                        opportunities waiting.</p>
+                </div>
+
+                <div class="grid">
+
+                    <!-- ROW 1: 4 small widgets -->
+                    <div class="w c1 anim d1">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 12h-4l-3 9-6-18-3 9H2" stroke="var(--teal)" stroke-width="1.6"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Mission Progress
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="ring-wrap">
+                                <svg width="120" height="120" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="52" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="52" stroke-dasharray="326.73"
+                                        stroke-dashoffset="88.22" />
+                                </svg>
+                                <div class="ring-pct">73%</div>
+                            </div>
+                            <div class="ring-label">KCET Preparation</div>
+                            <div class="ring-sub">12 of 16 milestones</div>
+                        </div>
+                    </div>
+
+                    <div class="w c1 anim d1">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Z"
+                                        stroke="var(--teal)" stroke-width="1.6" />
+                                    <path d="M12 6v6l4 2" stroke="var(--teal)" stroke-width="1.6"
+                                        stroke-linecap="round" />
+                                </svg>
+                                Estimated Rank
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="rank-n">1,842</div>
+                            <div class="rank-r">Range: 1,842 – 2,310</div>
+                            <div class="rank-e">KCET 2026 · Engineering</div>
+                            <div class="rank-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                +340 ranks since last mock
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w c1 anim d1">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 2Z"
+                                        stroke="var(--accent-orange)" stroke-width="1.6" stroke-linejoin="round" />
+                                </svg>
+                                Funding Available
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="schol-a">₹3.2L<span> available</span></div>
+                            <div class="schol-i">
+                                <div class="schol-d"></div>
+                                <div style="flex:1;">
+                                    <div class="schol-n">Karnataka Govt Merit</div>
+                                    <div class="schol-de">Closes in 4 days</div>
+                                </div>
+                                <div class="schol-v">₹1.2L</div>
+                            </div>
+                            <div class="schol-i">
+                                <div class="schol-d"></div>
+                                <div style="flex:1;">
+                                    <div class="schol-n">RVCE Alumni Grant</div>
+                                    <div class="schol-de">Closes in 11 days</div>
+                                </div>
+                                <div class="schol-v">₹80K</div>
+                            </div>
+                            <div class="schol-i">
+                                <div class="schol-d ap"></div>
+                                <div style="flex:1;">
+                                    <div class="schol-n">NSP Central Sector</div>
+                                    <div class="schol-de">Applied · Under review</div>
+                                </div>
+                                <div class="schol-v" style="color:var(--accent-green);">₹50K</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w c1 anim d1">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+                                        stroke="var(--accent-purple)" stroke-width="1.6" />
+                                </svg>
+                                Career Match
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="career-ring">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle fill="none" stroke="var(--line)" stroke-width="6" cx="40" cy="40" r="34" />
+                                    <circle fill="none" stroke="url(#gradPurple)" stroke-width="6"
+                                        stroke-linecap="round" cx="40" cy="40" r="34" stroke-dasharray="213.6"
+                                        stroke-dashoffset="12.8" />
+                                </svg>
+                                <div class="career-pct">94%</div>
+                            </div>
+                            <div class="career-info">
+                                <div class="career-n">Data Scientist</div>
+                                <div class="career-s">Avg CTC: ₹18L (3 yrs)</div>
+                            </div>
+                            <div class="career-sk"><span>Python</span><span>ML</span><span>Stats</span><span>SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 2: Admission Probabilities (wide) -->
+                    <div class="w c4 anim d2">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5Z" stroke="var(--teal)" stroke-width="1.6"
+                                        stroke-linejoin="round" />
+                                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--teal)" stroke-width="1.6"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                Your Admission Chances
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="prob">
+                                <div class="prob-c">
+                                    <div class="prob-n">RV College of Engineering</div>
+                                    <div class="prob-b">Computer Science & Engineering</div>
+                                </div>
+                                <div class="prob-bar-w">
+                                    <div class="prob-bar-f hi" style="width:0%" data-w="93%"></div>
+                                </div>
+                                <div class="prob-p hi">93%</div>
+                            </div>
+                            <div class="prob">
+                                <div class="prob-c">
+                                    <div class="prob-n">BMS College of Engineering</div>
+                                    <div class="prob-b">AI & Machine Learning</div>
+                                </div>
+                                <div class="prob-bar-w">
+                                    <div class="prob-bar-f hi" style="width:0%" data-w="96%"></div>
+                                </div>
+                                <div class="prob-p hi">96%</div>
+                            </div>
+                            <div class="prob">
+                                <div class="prob-c">
+                                    <div class="prob-n">PES University</div>
+                                    <div class="prob-b">Electronics & Communication</div>
+                                </div>
+                                <div class="prob-bar-w">
+                                    <div class="prob-bar-f md" style="width:0%" data-w="67%"></div>
+                                </div>
+                                <div class="prob-p md">67%</div>
+                            </div>
+                            <div class="prob">
+                                <div class="prob-c">
+                                    <div class="prob-n">MS Ramaiah Institute</div>
+                                    <div class="prob-b">Information Science</div>
+                                </div>
+                                <div class="prob-bar-w">
+                                    <div class="prob-bar-f hi" style="width:0%" data-w="89%"></div>
+                                </div>
+                                <div class="prob-p hi">89%</div>
+                            </div>
+                            <div class="prob">
+                                <div class="prob-c">
+                                    <div class="prob-n">Dayananda Sagar College</div>
+                                    <div class="prob-b">Computer Science</div>
+                                </div>
+                                <div class="prob-bar-w">
+                                    <div class="prob-bar-f hi" style="width:0%" data-w="98%"></div>
+                                </div>
+                                <div class="prob-p hi">98%</div>
+                            </div>
+                            <div
+                                style="margin-top:12px;padding:10px;background:var(--bg-elevated);border-radius:var(--r);border:1px solid var(--line-subtle);">
+                                <p style="font-size:11px;color:var(--ink-faint);line-height:1.5;"><strong
+                                        style="color:var(--ink-soft);">Why these colleges?</strong> Based on your
+                                    predicted KCET rank (1,842), budget (₹2-4L/year), location (Bengaluru), and career
+                                    goal (Data Science). <a href="#" style="color:var(--teal-bright);">See full
+                                        reasoning →</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 3: Action Center + Timeline -->
+                    <div class="w c2 anim d3">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"
+                                        stroke="var(--accent-rose)" stroke-width="1.6" />
+                                    <path d="M12 8v5M12 16h.01" stroke="var(--accent-rose)" stroke-width="1.6"
+                                        stroke-linecap="round" />
+                                </svg>
+                                Action Center <span
+                                    style="font-family:var(--mono);font-size:11px;color:var(--accent-rose);margin-left:8px;">3
+                                    require action</span>
+                            </div>
+                        </div>
+                        <div class="w-b w-scroll">
+                            <div class="act">
+                                <div class="act-ic u"><svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M12 9v4M12 16h.01M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"
+                                            stroke="currentColor" stroke-width="1.6" />
+                                        <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" />
+                                    </svg></div>
+                                <div class="act-c">
+                                    <div class="act-t">KCET Choice Filling Opens Tomorrow</div>
+                                    <div class="act-d">Your predicted rank (1,842) puts you in a strong position for
+                                        RVCE CSE and BMS AIML.</div>
+                                    <div class="act-m">Due tomorrow · 9:00 AM · High Priority</div>
+                                </div>
+                                <button class="act-b p">View List</button>
+                            </div>
+                            <div class="act">
+                                <div class="act-ic w"><svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M12 9v4M12 16h.01M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"
+                                            stroke="currentColor" stroke-width="1.6" />
+                                        <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" />
+                                    </svg></div>
+                                <div class="act-c">
+                                    <div class="act-t">Scholarship: Karnataka Govt Merit</div>
+                                    <div class="act-d">You are eligible for ₹1.2L. Application closes in 4 days. Income
+                                        certificate required.</div>
+                                    <div class="act-m">Closes in 4 days · ₹1.2L at stake</div>
+                                </div>
+                                <button class="act-b p">Apply Now</button>
+                            </div>
+                            <div class="act">
+                                <div class="act-ic i"><svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"
+                                            stroke="currentColor" stroke-width="1.6" />
+                                        <path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" />
+                                    </svg></div>
+                                <div class="act-c">
+                                    <div class="act-t">Document Verification Pending</div>
+                                    <div class="act-d">Caste certificate needs re-upload. Previous file was blurry. New
+                                        guidelines require 300 DPI scan.</div>
+                                    <div class="act-m">3 documents verified · 1 pending</div>
+                                </div>
+                                <button class="act-b g">Re-upload</button>
+                            </div>
+                            <div class="act">
+                                <div class="act-ic s"><svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"
+                                            stroke="currentColor" stroke-width="1.6" />
+                                        <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                                <div class="act-c">
+                                    <div class="act-t">Mock Test 4 Completed</div>
+                                    <div class="act-d">Score: 142/180. Rank improved by 340. Chemistry needs attention
+                                        (-12 marks vs target).</div>
+                                    <div class="act-m">Completed 2 hours ago</div>
+                                </div>
+                                <button class="act-b g">View</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w c2 anim d3">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" stroke="var(--teal)"
+                                        stroke-width="1.6" stroke-linejoin="round" />
+                                    <path d="M9 22V12h6v10" stroke="var(--teal)" stroke-width="1.6"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                Your Mission Timeline
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="tl">
+                                <div class="tl-i">
+                                    <div class="tl-d done"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t done">KCET Registration</div>
+                                        <div class="tl-da">Completed · Mar 15</div>
+                                    </div>
+                                </div>
+                                <div class="tl-i">
+                                    <div class="tl-d done"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t done">Mock Test Series 1-4</div>
+                                        <div class="tl-da">Completed · Jun 12</div>
+                                    </div>
+                                </div>
+                                <div class="tl-i">
+                                    <div class="tl-d act"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t">Choice Filling</div>
+                                        <div class="tl-da to">Tomorrow · Jun 20</div>
+                                    </div>
+                                </div>
+                                <div class="tl-i">
+                                    <div class="tl-d pen"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t">Document Verification</div>
+                                        <div class="tl-da">Jun 22 · 2 days</div>
+                                    </div>
+                                </div>
+                                <div class="tl-i">
+                                    <div class="tl-d pen"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t">Seat Allotment Round 1</div>
+                                        <div class="tl-da ur">Jun 25 · 5 days</div>
+                                    </div>
+                                </div>
+                                <div class="tl-i">
+                                    <div class="tl-d pen"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t">Fee Payment & Confirmation</div>
+                                        <div class="tl-da">Jun 28 · 8 days</div>
+                                    </div>
+                                </div>
+                                <div class="tl-i">
+                                    <div class="tl-d pen"></div>
+                                    <div class="tl-c">
+                                        <div class="tl-t">College Reporting</div>
+                                        <div class="tl-da">Jul 5 · 15 days</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 4: Daily Recommendation (wide) -->
+                    <div class="w c4 anim d4">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26A6.98 6.98 0 0 1 5 9a7 7 0 0 1 7-7Z"
+                                        stroke="var(--teal)" stroke-width="1.5" stroke-linejoin="round" />
+                                    <path d="M9 22h6" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                                Today's Recommendation
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="rec">
+                                <div class="rec-h">
+                                    <span class="rec-b">HIGH IMPACT</span>
+                                    <span style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);">AI
+                                        Confidence: 94%</span>
+                                </div>
+                                <div class="rec-t">Complete Physics Mock Test 4 — Focus on Electromagnetism</div>
+                                <div class="rec-d">Your last 3 mock tests show a consistent gap in Electromagnetic
+                                    Induction (-8 marks avg). This module accounts for 14% of KCET Physics. Mastering it
+                                    could improve your rank by <strong style="color:var(--teal-bright);">340
+                                        positions</strong>.</div>
+                                <div class="rec-imp">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2v20M2 12h20M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+                                            stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="rec-imp-t">Expected impact: Rank 1,842 → 1,502 (+340)</span>
+                                </div>
+                                <div class="rec-a">
+                                    <button class="btn btn-primary"
+                                        style="padding:10px 20px;background:linear-gradient(135deg,var(--teal),var(--steel-blue));color:#fff;border:none;border-radius:var(--r);font-weight:600;cursor:pointer;">Start
+                                        Mock Test 4 →</button>
+                                    <button class="btn btn-ghost"
+                                        style="padding:10px 20px;background:transparent;border:1px solid var(--line);color:var(--ink-soft);border-radius:var(--r);font-weight:600;cursor:pointer;">View
+                                        Study Plan</button>
+                                </div>
+                            </div>
+                            <div style="margin-top:12px;display:flex;gap:12px;">
+                                <div
+                                    style="flex:1;padding:12px;background:var(--bg-elevated);border-radius:var(--r);border:1px solid var(--line-subtle);">
+                                    <div style="font-size:11px;color:var(--ink-faint);margin-bottom:4px;">Why this
+                                        recommendation?</div>
+                                    <div style="font-size:12px;color:var(--ink-soft);line-height:1.5;">Pattern analysis
+                                        of your 847 practice questions shows 73% accuracy in Mechanics but only 54% in
+                                        Electromagnetism. Your target colleges (RVCE, BMS) require 85%+ in this section.
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex:1;padding:12px;background:var(--bg-elevated);border-radius:var(--r);border:1px solid var(--line-subtle);">
+                                    <div style="font-size:11px;color:var(--ink-faint);margin-bottom:4px;">Time to
+                                        complete</div>
+                                    <div style="font-size:12px;color:var(--ink-soft);line-height:1.5;">45 minutes · 30
+                                        questions · Based on your avg speed (1.5 min/question). Best time: 6-8 AM (your
+                                        peak focus window).</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 5: Performance Chart + Education Graph -->
+                    <div class="w c2 anim d5">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 20V10M12 20V4M6 20v-6" stroke="var(--teal)" stroke-width="1.6"
+                                        stroke-linecap="round" />
+                                </svg>
+                                Mock Test Performance
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="chart-h">
+                                <div class="chart-bars">
+                                    <div class="chart-bar"
+                                        style="height:0%;background:linear-gradient(180deg,var(--accent-green),#56d364);"
+                                        data-h="65%"><span class="chart-bar-v">65</span><span
+                                            class="chart-bar-l">MT1</span></div>
+                                    <div class="chart-bar"
+                                        style="height:0%;background:linear-gradient(180deg,var(--accent-green),#56d364);"
+                                        data-h="72%"><span class="chart-bar-v">72</span><span
+                                            class="chart-bar-l">MT2</span></div>
+                                    <div class="chart-bar"
+                                        style="height:0%;background:linear-gradient(180deg,var(--accent-yellow),#e3b341);"
+                                        data-h="78%"><span class="chart-bar-v">78</span><span
+                                            class="chart-bar-l">MT3</span></div>
+                                    <div class="chart-bar"
+                                        style="height:0%;background:linear-gradient(180deg,var(--teal),var(--steel-blue));"
+                                        data-h="85%"><span class="chart-bar-v">85</span><span
+                                            class="chart-bar-l">MT4</span></div>
+                                    <div class="chart-bar"
+                                        style="height:0%;background:linear-gradient(180deg,var(--teal),var(--steel-blue));"
+                                        data-h="79%"><span class="chart-bar-v">79</span><span
+                                            class="chart-bar-l">MT5</span></div>
+                                    <div class="chart-bar"
+                                        style="height:0%;background:linear-gradient(180deg,var(--accent-rose),#f778ba);"
+                                        data-h="68%"><span class="chart-bar-v">68</span><span
+                                            class="chart-bar-l">MT6</span></div>
+                                </div>
+                            </div>
+                            <div class="chart-leg">
+                                <span><i style="background:var(--accent-green);"></i>Physics</span>
+                                <span><i style="background:var(--teal);"></i>Chemistry</span>
+                                <span><i style="background:var(--accent-rose);"></i>Maths</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w c2 anim d5">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="3" stroke="var(--teal)" stroke-width="1.6" />
+                                    <path
+                                        d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                                        stroke="var(--teal)" stroke-width="1.6" stroke-linecap="round" />
+                                </svg>
+                                Your Education Graph
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="graph">
+                                <div class="graph-n stu" style="left:10px;top:75px;">Lekhan</div>
+                                <div class="graph-n car" style="left:140px;top:25px;">Data Scientist</div>
+                                <div class="graph-n ski" style="left:140px;top:125px;">Python, ML, Stats</div>
+                                <div class="graph-n exa" style="left:270px;top:25px;">KCET 2026</div>
+                                <div class="graph-n exa" style="left:270px;top:75px;">JEE (Backup)</div>
+                                <div class="graph-n col" style="left:400px;top:25px;">RVCE / BMS</div>
+                                <div class="graph-n sch" style="left:400px;top:95px;">₹3.2L Scholarships</div>
+                                <div class="graph-n com" style="left:530px;top:60px;">Google / Amazon</div>
+                                <div class="graph-l" style="left:70px;top:85px;width:65px;transform:rotate(-20deg);">
+                                </div>
+                                <div class="graph-l" style="left:70px;top:95px;width:65px;transform:rotate(20deg);">
+                                </div>
+                                <div class="graph-l" style="left:220px;top:40px;width:45px;"></div>
+                                <div class="graph-l" style="left:220px;top:90px;width:45px;"></div>
+                                <div class="graph-l" style="left:350px;top:40px;width:45px;"></div>
+                                <div class="graph-l" style="left:350px;top:90px;width:45px;transform:rotate(10deg);">
+                                </div>
+                                <div class="graph-l" style="left:480px;top:50px;width:45px;"></div>
+                            </div>
+                            <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;text-align:center;">Every
+                                node is connected. Changing one updates predictions across the entire graph.</p>
+                        </div>
+                    </div>
+
+                    <!-- ROW 6: Opportunities + Motivation -->
+                    <div class="w c2 anim d5">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Z"
+                                        stroke="var(--accent-orange)" stroke-width="1.6" />
+                                    <path d="M12 6v6l4 2" stroke="var(--accent-orange)" stroke-width="1.6"
+                                        stroke-linecap="round" />
+                                </svg>
+                                Opportunities You Might Have Missed
+                            </div>
+                        </div>
+                        <div class="w-b w-scroll">
+                            <div class="opp">
+                                <div class="opp-ic sch"><svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2l2.5 5 5.5.8-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.5-.8L12 2Z"
+                                            stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                                    </svg></div>
+                                <div class="opp-c">
+                                    <div class="opp-t">Karnataka Govt Merit Scholarship — ₹1.2L</div>
+                                    <div class="opp-d">You are eligible but haven't applied. Income certificate is the
+                                        only requirement. Deadline: 4 days.</div>
+                                    <div class="opp-im">AI detected: 94% eligibility match</div>
+                                </div>
+                                <div class="opp-ar"><svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="opp">
+                                <div class="opp-ic int"><svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+                                            stroke="currentColor" stroke-width="1.6" />
+                                    </svg></div>
+                                <div class="opp-c">
+                                    <div class="opp-t">Data Science Internship at Flipkart</div>
+                                    <div class="opp-d">Your Python + ML skills match 87%. 3-month summer internship.
+                                        Stipend: ₹25K/month.</div>
+                                    <div class="opp-im">Skill match: 87% · Stipend: ₹25K/mo</div>
+                                </div>
+                                <div class="opp-ar"><svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="opp">
+                                <div class="opp-ic imp"><svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M22 12h-4l-3 9-6-18-3 9H2" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                                <div class="opp-c">
+                                    <div class="opp-t">Improve Chemistry by 12 marks → +340 rank</div>
+                                    <div class="opp-d">Your Electromagnetism weakness is costing 8 marks. 2 hours of
+                                        focused practice could close this gap.</div>
+                                    <div class="opp-im">Expected impact: 1,842 → 1,502 rank</div>
+                                </div>
+                                <div class="opp-ar"><svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="opp">
+                                <div class="opp-ic hack"><svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"
+                                            stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                                    </svg></div>
+                                <div class="opp-c">
+                                    <div class="opp-t">Smart India Hackathon 2026</div>
+                                    <div class="opp-d">Team registration open. Your AI/ML skills are in high demand.
+                                        Winning teams get direct interview calls from ISRO, DRDO.</div>
+                                    <div class="opp-im">Registration closes: Jun 28 · Prize: ₹1L</div>
+                                </div>
+                                <div class="opp-ar"><svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w c2 anim d5">
+                        <div class="w-h">
+                            <div class="w-t">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z"
+                                        stroke="var(--accent-rose)" stroke-width="1.6" stroke-linejoin="round" />
+                                </svg>
+                                Daily Motivation
+                            </div>
+                        </div>
+                        <div class="w-b">
+                            <div class="mot-q">One small improvement today can change your options next month. Your
+                                340-rank jump in the last mock wasn't luck — it was consistency.</div>
+                            <div class="mot-a">— Your AI Coach, 7:42 AM</div>
+                            <div class="mot-st">
+                                <span style="font-size:18px;">🔥</span>
+                                <span>You have a <strong>12-day streak</strong> of daily check-ins. Keep it
+                                    going!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /grid -->
+            </div><!-- /cc -->
+
+        </main>
+    </div><!-- /app -->
+
+    <nav class="mob-nav">
+        <div class="mob-items">
+            <div class="mob-item active">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" stroke="currentColor" stroke-width="1.6"
+                        stroke-linejoin="round" />
+                    <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                </svg>
+                Home
+            </div>
+            <div class="mob-item">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" />
+                    <path
+                        d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                        stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+                Discover
+            </div>
+            <div class="mob-item">
+                <span class="mob-dot"></span>
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="1.6"
+                        stroke-linejoin="round" />
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6"
+                        stroke-linejoin="round" />
+                </svg>
+                Colleges
+            </div>
+            <div class="mob-item">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26A6.98 6.98 0 0 1 5 9a7 7 0 0 1 7-7Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                    <path d="M9 22h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                Ask AI
+            </div>
+            <div class="mob-item">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+                        stroke="currentColor" stroke-width="1.6" />
+                </svg>
+                Profile
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Animate progress rings
+        setTimeout(() => {
+            document.querySelectorAll('.ring-fill').forEach(el => {
+                el.style.strokeDashoffset = '88.22';
+            });
+        }, 300);
+
+        // Animate probability bars
+        setTimeout(() => {
+            document.querySelectorAll('.prob-bar-f').forEach(bar => {
+                bar.style.width = bar.dataset.w;
+            });
+        }, 500);
+
+        // Animate chart bars
+        setTimeout(() => {
+            document.querySelectorAll('.chart-bar').forEach(bar => {
+                bar.style.height = bar.dataset.h;
+            });
+        }, 700);
+
+        // Animate graph lines
+        setTimeout(() => {
+            document.querySelectorAll('.graph-l').forEach(line => {
+                line.classList.add('act');
+            });
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
