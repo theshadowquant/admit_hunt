@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Admit Hunt — Your Education Operating System</title>
+<link rel="icon" type="image/jpeg" href="Admit_Hunt.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -89,6 +90,7 @@
   .gap-5 { gap: 20px; }
   .gap-6 { gap: 24px; }
   .hidden { display: none !important; }
+.landing-page.hidden, .auth-page.hidden { display: none !important; }
   .text-center { text-align: center; }
   .w-full { width: 100%; }
   .h-full { height: 100%; }
@@ -270,6 +272,7 @@
   .landing-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
   .landing-logo { font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--navy); display: flex; align-items: center; gap: 8px; }
   .landing-logo span { color: var(--teal); }
+  .landing-logo img { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; }
   .landing-nav-links { display: flex; gap: 32px; align-items: center; }
   .landing-nav-links a { font-size: 14px; font-weight: 500; color: var(--ink-soft); position: relative; padding: 4px 0; transition: color 0.2s ease; }
   .landing-nav-links a:hover { color: var(--navy); }
@@ -377,6 +380,8 @@
   .field-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(45,189,182,0.12); }
   .field-img { height: 180px; width: 100%; overflow: hidden; position: relative; background: linear-gradient(135deg, var(--bg-soft), #e2e8f0); display: flex; align-items: center; justify-content: center; }
   .field-img svg { width: 64px; height: 64px; color: var(--ink-faint); opacity: 0.5; }
+  .field-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .field-card:hover .field-img img { transform: scale(1.06); }
   .field-content { padding: 24px; }
   .field-card h3 { font-size: 18px; margin-bottom: 8px; color: var(--navy); font-family: var(--display); }
   .field-card p { font-size: 14px; color: var(--ink-soft); margin-bottom: 16px; line-height: 1.6; }
@@ -490,7 +495,7 @@
      ================================================================ */
 
   .os-app { display: none; min-height: 100vh; background: var(--bg-main); }
-  .os-app.active { display: block; }
+  .os-app.active { display: block !important; }
 
   .os-topnav {
     position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: var(--z-sticky);
@@ -503,6 +508,7 @@
   .os-topnav-left { display: flex; align-items: center; gap: 16px; }
   .os-logo { font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--navy); display: flex; align-items: center; gap: 8px; }
   .os-logo span { color: var(--teal); }
+  .os-logo img { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; }
   .os-workspace-switch {
     display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--radius-md);
     border: 1px solid var(--line); font-size: 13px; font-weight: 500; color: var(--ink-soft); cursor: pointer; transition: all 0.2s ease;
@@ -998,7 +1004,7 @@
   <!-- Navigation -->
   <nav class="landing-nav" id="landingNav">
     <div class="landing-nav-inner">
-      <a href="#" class="landing-logo" onclick="event.preventDefault(); showPage('landing')">Admit<span>Hunt</span></a>
+      <a href="#" class="landing-logo" onclick="event.preventDefault(); showPage('landing')"><img src="Admit_Hunt.jpeg" alt="Admit Hunt Logo">Admit<span>Hunt</span></a>
       <div class="landing-nav-links">
         <a href="#fields" onclick="scrollToSection('fields')">Fields</a>
         <a href="#services" onclick="scrollToSection('services')">Services</a>
@@ -1061,7 +1067,9 @@
           <div class="radar-dot" style="top:18%;left:58%;"></div>
           <div class="radar-dot" style="top:55%;left:28%;"></div>
           <div class="radar-dot" style="top:72%;left:65%;"></div>
-          <div class="radar-center">AH</div>
+          <div class="radar-center">
+            <img src="Admit_Hunt.jpeg" alt="Admit Hunt Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+          </div>
         </div>
         <div class="float-card fc-1">
           <div class="fc-label">Predicted Rank</div>
@@ -1111,7 +1119,7 @@
       </div>
       <div class="fields-grid">
         <div class="field-card reveal" onclick="showAuth('signup')">
-          <div class="field-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="field-img"><img src="engineering_edu.png" alt="Engineering"></div>
           <div class="field-content">
             <h3>Engineering</h3>
             <p>Secure seats in premier engineering colleges. Complete counseling support for JEE, COMEDK, and direct admissions.</p>
@@ -1119,7 +1127,7 @@
           </div>
         </div>
         <div class="field-card reveal" onclick="showAuth('signup')">
-          <div class="field-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="field-img"><img src="medical_edu.png" alt="Medical"></div>
           <div class="field-content">
             <h3>Medical</h3>
             <p>Join top-tier medical colleges. Expert navigation for NEET counseling, MBBS, and allied health sciences.</p>
@@ -1127,7 +1135,7 @@
           </div>
         </div>
         <div class="field-card reveal" onclick="showAuth('signup')">
-          <div class="field-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div class="field-img"><img src="mba_edu.png" alt="MBA"></div>
           <div class="field-content">
             <h3>MBA</h3>
             <p>Get admission into top B-schools in India &amp; Abroad. Expert profile building and interview prep.</p>
@@ -1135,7 +1143,7 @@
           </div>
         </div>
         <div class="field-card reveal" onclick="showAuth('signup')">
-          <div class="field-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="field-img"><img src="law_edu.png" alt="Law"></div>
           <div class="field-content">
             <h3>Law</h3>
             <p>Secure admissions in top national law universities (NLUs) and international law schools. Expert CLAT &amp; LSAT guidance.</p>
@@ -1143,7 +1151,7 @@
           </div>
         </div>
         <div class="field-card reveal" onclick="showAuth('signup')">
-          <div class="field-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+          <div class="field-img"><img src="design_edu.png" alt="Design"></div>
           <div class="field-content">
             <h3>Design</h3>
             <p>Join elite design institutes (NID, NIFT, IITs). Portfolio development and design entrance exam guidance.</p>
@@ -1151,7 +1159,7 @@
           </div>
         </div>
         <div class="field-card reveal" onclick="showAuth('signup')">
-          <div class="field-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></div>
+          <div class="field-img"><img src="more_edu.png" alt="And More"></div>
           <div class="field-content">
             <h3>And More</h3>
             <p>Guidance for Commerce, Pure Sciences, Architecture, Liberal Arts, and other emerging fields globally.</p>
@@ -1356,7 +1364,7 @@
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="landing-logo" style="color: #fff;">Admit<span style="color: var(--teal);">Hunt</span></div>
+          <div class="landing-logo" style="color: #fff;"><img src="Admit_Hunt.jpeg" alt="Admit Hunt Logo">Admit<span style="color: var(--teal);">Hunt</span></div>
           <p>Hunting the right college for your future — personalized admissions guidance for India and abroad.</p>
           <div class="footer-badge">
             <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -1401,7 +1409,7 @@
 <div id="authPage" class="auth-page hidden">
   <div class="auth-left">
     <div class="auth-left-content">
-      <div class="landing-logo" style="color: #fff; margin-bottom: 24px; font-size: 28px;">Admit<span style="color: var(--teal);">Hunt</span></div>
+      <div class="landing-logo" style="color: #fff; margin-bottom: 24px; font-size: 28px;"><img src="Admit_Hunt.jpeg" alt="Admit Hunt Logo" style="width: 38px; height: 38px;">Admit<span style="color: var(--teal);">Hunt</span></div>
       <h2 id="authLeftTitle">Your Education Operating System</h2>
       <p id="authLeftSub">Join 50,000+ students who found their best-fit college with AI-powered guidance.</p>
       <div style="margin-top: 40px;">
@@ -1487,7 +1495,7 @@
         <button class="btn-icon" id="mobileMenuBtn" style="display: none;" onclick="toggleMobileSidebar()">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
         </button>
-        <a href="#" class="os-logo" onclick="event.preventDefault(); navigateOS('mission-control')">Admit<span>Hunt</span></a>
+        <a href="#" class="os-logo" onclick="event.preventDefault(); navigateOS('mission-control')"><img src="Admit_Hunt.jpeg" alt="Admit Hunt Logo">Admit<span>Hunt</span></a>
         <div class="os-workspace-switch" onclick="toggleWorkspace()">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2Z"/><path d="M3 7l9 6 9-6"/></svg>
           <span id="workspaceLabel">Admission</span>
@@ -2583,11 +2591,13 @@ const assessmentData = [
 // NAVIGATION & ROUTING
 // ================================================================
 function showPage(page) {
-  document.querySelectorAll('.landing-page, .auth-page, .os-app').forEach(el => el.classList.add('hidden'));
+  // Hide landing and auth
   document.getElementById('landingPage').classList.add('hidden');
   document.getElementById('authPage').classList.add('hidden');
-  document.getElementById('osApp').classList.remove('active');
-  document.getElementById('osApp').style.display = 'none';
+
+  // NEVER add .hidden to osApp - use .active class only
+  var osApp = document.getElementById('osApp');
+  osApp.classList.remove('active');
 
   if (page === 'landing') {
     document.getElementById('landingPage').classList.remove('hidden');
@@ -2596,10 +2606,8 @@ function showPage(page) {
     document.getElementById('authPage').classList.remove('hidden');
     state.currentPage = 'auth';
   } else if (page === 'os') {
-    document.getElementById('osApp').style.display = 'block';
-    setTimeout(() => document.getElementById('osApp').classList.add('active'), 10);
+    osApp.classList.add('active');
     state.currentPage = 'os';
-    updateDate();
   }
   window.scrollTo(0, 0);
 }
@@ -2680,7 +2688,7 @@ function handleGoogleAuth() {
 }
 
 function navigateOS(page) {
-  // Hide all OS pages
+  // Hide all OS pages (sub-pages inside osApp)
   document.querySelectorAll('.os-page').forEach(el => {
     el.classList.add('hidden');
     if(el.classList.contains('dt-page')) el.classList.remove('active');
